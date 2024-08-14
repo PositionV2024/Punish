@@ -4,8 +4,7 @@ Punishment awaits naughty Minecraft players. Punish players that you think are b
 
 ![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png)
 
-## GIF
-![](https://img.youtube.com/vi/5WbTjcTP6Y4)
+![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif)
 
 [Video here](https://youtu.be/WIT9Etq-qts)
 
