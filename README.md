@@ -5,7 +5,8 @@ Punishment awaits naughty Minecraft players. Punish players that you think are b
 ![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png)
 
 ## GIF
-![](https://img.youtube.com/vi/5WbTjcTP6Y4/0.jpg)  [](https://www.youtube.com/watch?v=https://youtu.be/5WbTjcTP6Y4)
+![](https://img.youtube.com/vi/5WbTjcTP6Y4/0.jpg)
+[](https://www.youtube.com/watch?v=5WbTjcTP6Y4)
 
 
 ## Command usage:
