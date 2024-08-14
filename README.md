@@ -6,7 +6,8 @@ Punishment awaits naughty Minecraft players. Punish players that you think are b
 
 ## GIF
 ![](https://img.youtube.com/vi/5WbTjcTP6Y4/0.jpg)
-[](https://www.youtube.com/watch?v=5WbTjcTP6Y4)
+
+[Video here](https://www.youtube.com/watch?v=5WbTjcTP6Y4)
 
 
 ## Command usage:
