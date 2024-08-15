@@ -11,11 +11,11 @@ public class Util {
     private final static String pluginPrefix = "[Punish] ";
     private final static String pluginColor = "&8";
 
-    private static int defaultTmporaryBanTimeDuration = 1;
+    private static int defaultTempBanDuration = 1;
 
     private static String stringBuilderMessage = null;
 
-    public static int getDefaultTmporaryBanTimeDuration() { return defaultTmporaryBanTimeDuration; }
+    public static int getDefaultTempBanTimeDuration() { return defaultTempBanDuration; }
     private static String getPluginColor() { return pluginColor; }
     public static String getStringBuilderMessage() { return stringBuilderMessage; }
     public static String Color(String message) { return ChatColor.translateAlternateColorCodes('&', getPluginColor() + getPluginPrefix() +  "&f" + message); }
@@ -31,14 +31,14 @@ public class Util {
         }
         return stringBuilder;
     }
-    private static Calendar setCalender(int time) {
+    private static Calendar createCalender(int time) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, time);
         return cal;
     }
 
     public static void setBan(Player target, String banReason , int duration, String source) {
-        Calendar cal = setCalender(duration);
+        Calendar cal = createCalender(duration);
         Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), source);
     }
     public static void setBan(Player target, String banReason, String source) {

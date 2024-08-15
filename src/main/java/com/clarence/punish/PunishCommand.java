@@ -5,8 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -38,10 +36,10 @@ public class PunishCommand implements CommandExecutor {
             return true;
         }
 
-        if (target == player) {
-            player.sendMessage(Util.Color("&4You can't punish yourself."));
-            return true;
-        }
+        //if (target == player) {
+        //    player.sendMessage(Util.Color("&4You can't punish yourself."));
+        //    return true;
+        //}
 
         handleInventory(player, target, args);
 
@@ -68,33 +66,6 @@ public class PunishCommand implements CommandExecutor {
 
         StringBuilder stringBuilder = Util.stringBuilder(args, 1);
 
-        createInventory(player, getTargetByUUID);
-    }
-
-    void createInventory(Player player, Player getTargetByUUID) {
-        Inventory inventory = InventoryHelper.createDefaultInventory(InventoryHelper.getInventoryTitle(), InventoryHelper.getDefaultInventoryMaterial());
-
-        //Essentials
-        ItemStack reasonItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getPunishMaterial(), InventoryHelper.getItemTitleColor() + "Reason for punishment", InventoryHelper.getItemLoreColor() + Util.getStringBuilderMessage() + ".");
-        ItemStack playerNameItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getPlayerNameItemMaterial(), InventoryHelper.getItemTitleColor() + "Target's name", InventoryHelper.getItemLoreColor() + getTargetByUUID.getDisplayName());
-        ItemStack playerUUIDItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getTypesOfPunishmentMaterial(), InventoryHelper.getItemTitleColor() + "Player's UUID", InventoryHelper.getItemLoreColor() + getTargetByUUID.getUniqueId());
-
-        ItemStack typeOfPunishmentsItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getTypesOfPunishmentMaterial(), InventoryHelper.getItemTitleColor() + "Types of punishments", "");
-
-        //Types of punishments
-        ItemStack kickItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getKickItemMaterial(), InventoryHelper.getItemTitleColor() + InventoryHelper.getKickTitle(), InventoryHelper.getItemLoreColor() + "Good for players", InventoryHelper.getItemLoreColor() + "breaking small rules.");
-        ItemStack temporaryBanItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getTemporaryBanMaterial(), InventoryHelper.getItemTitleColor() + InventoryHelper.getTemporaryBanTitle(), InventoryHelper.getItemLoreColor() + "Good for players", InventoryHelper.getItemLoreColor() + "that continue bad behaviour.");
-        ItemStack banItemStack = InventoryHelper.createNewItemStack(InventoryHelper.getBanMaterial(), InventoryHelper.getItemTitleColor() + InventoryHelper.getBanTitle(), InventoryHelper.getItemLoreColor() + "Good for players", InventoryHelper.getItemLoreColor() + "that are always putting on", InventoryHelper.getItemLoreColor() + "a continuous cycle of bad behaviour.");
-
-
-        InventoryHelper.setInventoryItem(inventory, 13, typeOfPunishmentsItemStack);
-        InventoryHelper.setInventoryItem(inventory, 19, reasonItemStack);
-        InventoryHelper.setInventoryItem(inventory, 25, playerNameItemStack);
-        InventoryHelper.setInventoryItem(inventory, 21, kickItemStack);
-        InventoryHelper.setInventoryItem(inventory, 22, temporaryBanItemStack);
-        InventoryHelper.setInventoryItem(inventory, 23, banItemStack);
-        InventoryHelper.setInventoryItem(inventory, 34, playerUUIDItemStack);
-
-        InventoryHelper.playerOpenInventory(player, inventory);
+        InventoryHelper inventoryHelper = new InventoryHelper(player, target);
     }
 }
