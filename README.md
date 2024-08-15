@@ -8,7 +8,7 @@ Gif
 ![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif)
 #
 Youtube video
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts)
+[![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "Punish naughty Minecraft players")
 
 
 ## Command usage:
