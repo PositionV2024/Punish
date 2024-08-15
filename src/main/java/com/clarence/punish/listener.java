@@ -38,21 +38,23 @@ public class listener implements Listener {
             if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getKickTitle())) {
                 player.closeInventory();
                 Bukkit.broadcastMessage(Util.Color("&7" + target.getDisplayName() + " have been kicked from this server."));
-                target.kickPlayer(Util.Color("&7You have been kicked from this server. &b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
+                target.kickPlayer(Util.Color("&7You have been kicked from this server. &l&b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
             }
         }
         if (event.getCurrentItem().getType() == InventoryHelper.getTemporaryBanMaterial()) {
             if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
                 player.closeInventory();
                 Bukkit.broadcastMessage(Util.Color("&7" + target.getDisplayName() + " have been temporary banned from this server."));
-                target.kickPlayer(Util.Color("&7You have been temporary banned from this server. &b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
+                target.kickPlayer(Util.Color("&7You have been temporary banned from this server. &l&b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
+                Util.setBan(target, Util.getStringBuilderMessage(), Util.getDefaultTmporaryBanTimeDuration(), null);
             }
         }
         if (event.getCurrentItem().getType() == InventoryHelper.getBanMaterial()) {
             if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getBanTitle())) {
                 player.closeInventory();
                 Bukkit.broadcastMessage(Util.Color("&7" + target.getDisplayName() + " have been banned from this server."));
-                target.kickPlayer(Util.Color("&7You have been banned from this server. &b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
+                target.kickPlayer(Util.Color("&7You have been banned from this server. &l&b[REASON]&7: " + Util.getStringBuilderMessage() + "."));
+                Util.setBan(target, Util.getStringBuilderMessage(), null);
             }
         }
         event.setCancelled(true);
