@@ -6,9 +6,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class PunishCommand implements CommandExecutor {
+    public static ArrayList<UUID> uuid = new ArrayList<>();
     //Command usage: /punish <player> <reason>
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -50,7 +52,11 @@ public class PunishCommand implements CommandExecutor {
             player.sendMessage(Util.Color(Errors.getPunishmentReason()));
             return;
         }
-
+       // if (uuid.contains(target.getUniqueId())) {
+            //player.sendMessage(Util.Color("&7Someone is already punishing this player."));
+           // return;
+        //}
+        //uuid.add(target.getUniqueId());
         if (unique_identifier.getUUIDHashMap().containsValue(target.getUniqueId())) {
             player.sendMessage(Util.Color("&7Someone is already punishing this player."));
             return;

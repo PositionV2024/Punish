@@ -15,11 +15,14 @@ public class listener implements Listener {
     @EventHandler
     public void onInventoryClickedEvent(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-
+        //Player target = null;
+        //for (UUID uuid : PunishCommand.uuid) {
+           // target = Bukkit.getServer().getPlayer(uuid);
+       // }
         UUID uuid = (UUID) unique_identifier.getUUIDHashMap().get(player.getUniqueId());
 
         if (uuid == null) {
-            return;
+           return;
         }
 
         Player target = player.getServer().getPlayer(uuid);
@@ -46,12 +49,7 @@ public class listener implements Listener {
         }
         if (event.getCurrentItem().getType() == InventoryHelper.getTemporaryBanMaterial()) {
             if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
-                Inventory inventory = InventoryHelper.createDefaultInventory("Select a duration", InventoryHelper.getDefaultInventoryMaterial());
-                for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 35, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 11, 20, 29, 38, 15, 24, 33, 42, 10, 20, 30, 16, 25, 33}) {
-                    ItemStack itemStack = InventoryHelper.createNewItemStack(InventoryHelper.getDefaultInventoryMaterial(), "", "");
-                    InventoryHelper.setInventoryItem(inventory, i, itemStack);
-                }
-                InventoryHelper.playerOpenInventory(player, inventory);
+                createDurationInventory(player);
             }
         }
         if (event.getCurrentItem().getType() == InventoryHelper.getBanMaterial()) {
@@ -68,6 +66,9 @@ public class listener implements Listener {
     @EventHandler
     public void onInventoryCloseEvent(InventoryCloseEvent event) {
         unique_identifier.getUUIDHashMap().remove(event.getPlayer().getUniqueId());
+        //for (UUID uuid : PunishCommand.uuid) {
+            //PunishCommand.uuid.remove(uuid);
+        //}
     }
     // if (!event.getView().getTitle().equalsIgnoreCase(InventoryHelper.getInventoryTitle())) {
     //     return;
@@ -88,4 +89,13 @@ public class listener implements Listener {
     // }
 
     // event.getPlayer().sendMessage(Util.Color("&7You have stopped punishing " +  target.getDisplayName() + "."));
+
+    private void createDurationInventory(Player player){
+        Inventory inventory = InventoryHelper.createDefaultInventory("Select a duration", InventoryHelper.getDefaultInventoryMaterial());
+        for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 35, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 11, 20, 29, 38, 15, 24, 33, 42, 10, 20, 30, 16, 25, 33}) {
+            ItemStack itemStack = InventoryHelper.createNewItemStack(InventoryHelper.getDefaultInventoryMaterial(), "", "");
+            InventoryHelper.setInventoryItem(inventory, i, itemStack);
+        }
+        InventoryHelper.playerOpenInventory(player, inventory);
+    }
 }
