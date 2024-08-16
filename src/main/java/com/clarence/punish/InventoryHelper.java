@@ -13,11 +13,14 @@ import java.util.Arrays;
 public class InventoryHelper {
 
     private static String inventoryTitle = "Punishment GUI";
-    private  String itemLoreColor = "" + ChatColor.BLUE;
-    private  String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
-    private  static String kickTitle = "[Kick]";
+    private static String itemLoreColor = "" + ChatColor.BLUE;
+    private static String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
+    private static String kickTitle = "[Kick]";
     private static String temporaryBanTitle = "[Temporary ban]";
     private static String banTitle = "[Ban]";
+
+    private static String MINUTES_10 = "[10 MINUTES]";
+    private static String MINUTES_20 = "[20 MINUTES]";
 
     private static Material defaultInventoryMaterial = Material.YELLOW_STAINED_GLASS_PANE;
     private static Material reasonToBePunishment = Material.WRITABLE_BOOK;
@@ -26,23 +29,78 @@ public class InventoryHelper {
     private static Material temporaryBanMaterial = Material.ENCHANTED_BOOK;
     private static Material banMaterial = Material.ENCHANTED_BOOK;
     private static Material typesOfPunishmentMaterial = Material.BOOK;
+    private static Material tempBanMaterial = Material.GOLD_BLOCK;
 
-    public static Material getDefaultInventoryMaterial() { return defaultInventoryMaterial; }
-    public static Material getTypesOfPunishmentMaterial() {return typesOfPunishmentMaterial; }
-    public static Material getBanMaterial() {return banMaterial; }
-    public static Material getTemporaryBanMaterial() { return temporaryBanMaterial; }
-    public static Material getKickItemMaterial() { return kickItemMaterial; }
+    private static Material Minutes10Material = Material.BOOK;
+    private static Material Minutes20Material = Material.BOOK;
 
-    public Material getPlayerNameItemMaterial() { return  playerNameItemMaterial; }
-    public Material getPunishMaterial() { return reasonToBePunishment; }
+    public static Material getDefaultInventoryMaterial() {
+        return defaultInventoryMaterial;
+    }
 
-    public String getItemTitleColor() {return itemTitleColor; }
-    public String getItemLoreColor() { return itemLoreColor; }
-    public static String getInventoryTitle() { return inventoryTitle; }
-    public static String getKickTitle() { return kickTitle; }
-    public static String getTemporaryBanTitle() { return temporaryBanTitle; }
-    public static String getBanTitle() { return banTitle; }
+    public static Material getTypesOfPunishmentMaterial() {
+        return typesOfPunishmentMaterial;
+    }
 
+    public static Material getBanMaterial() {
+        return banMaterial;
+    }
+
+    public static Material getTemporaryBanMaterial() {
+        return temporaryBanMaterial;
+    }
+
+    public static Material getKickItemMaterial() {
+        return kickItemMaterial;
+    }
+
+    public static Material getPlayerNameItemMaterial() {
+        return playerNameItemMaterial;
+    }
+
+    public static Material getPunishMaterial() {
+        return reasonToBePunishment;
+    }
+
+    public static String getItemTitleColor() {
+        return itemTitleColor;
+    }
+
+    public static String getItemLoreColor() {
+        return itemLoreColor;
+    }
+
+    public static String getInventoryTitle() {
+        return inventoryTitle;
+    }
+
+    public static String getKickTitle() {
+        return kickTitle;
+    }
+
+    public static String getTemporaryBanTitle() {
+        return temporaryBanTitle;
+    }
+
+    public static String getBanTitle() {
+        return banTitle;
+    }
+    public static String getMinutes10(){
+        return MINUTES_10;
+    }
+    public static String getMinutes20() {
+        return MINUTES_20;
+    }
+    public static Material getTempBanMaterial() {
+        return tempBanMaterial;
+    }
+
+    public static Material getMinutes10Material() {
+        return Minutes10Material;
+    }
+    public static Material getMinutes20Material() {
+        return Minutes20Material;
+    }
     public InventoryHelper(Player player, Player targetByUUID) {
         Inventory inventory = createDefaultInventory(getInventoryTitle(), getDefaultInventoryMaterial());
 
@@ -51,7 +109,7 @@ public class InventoryHelper {
         playerOpenInventory(player, inventory);
     }
 
-    public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial){
+    public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
         Inventory inventory = Bukkit.createInventory(null, 54, invTitle);
         for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 35, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 11, 20, 29, 38, 15, 24, 33, 42}) {
             ItemStack itemStack = createNewItemStack(inventoryFrameMaterial, "", "");
@@ -76,7 +134,8 @@ public class InventoryHelper {
     public static void playerOpenInventory(Player player, Inventory inventory) {
         player.openInventory(inventory);
     }
-    private void createBaseItemStack(Inventory inventory, Player targetByUUID) {
+
+    public static void createBaseItemStack(Inventory inventory, Player targetByUUID) {
         ItemStack reasonItemStack = createNewItemStack(getPunishMaterial(), getItemTitleColor() + "Reason for punishment", getItemLoreColor() + Util.getStringBuilderMessage() + ".");
         ItemStack playerNameItemStack = createNewItemStack(getPlayerNameItemMaterial(), getItemTitleColor() + "Target's name", getItemLoreColor() + targetByUUID.getDisplayName());
         ItemStack playerUUIDItemStack = createNewItemStack(getTypesOfPunishmentMaterial(), getItemTitleColor() + "Player's UUID", getItemLoreColor() + targetByUUID.getUniqueId());
@@ -95,5 +154,18 @@ public class InventoryHelper {
         setInventoryItem(inventory, 22, temporaryBanItemStack);
         setInventoryItem(inventory, 23, banItemStack);
         setInventoryItem(inventory, 34, playerUUIDItemStack);
+    }
+    public static void changeInventoryItem(Inventory inventory, Material inventoryFrameMaterial) {
+        for (int i : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 35, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 11, 20, 29, 38, 15, 24, 33, 42}) {
+            ItemStack itemStack = createNewItemStack(inventoryFrameMaterial, getItemTitleColor() + "Last confirmation");
+            setInventoryItem(inventory, i, itemStack);
+        }
+        ItemStack durationItemStack = InventoryHelper.createNewItemStack(getTempBanMaterial(), getItemTitleColor() + "Duration", getItemLoreColor() + "Select a duration");
+        ItemStack MINUTE_10ItemStack = InventoryHelper.createNewItemStack(getMinutes10Material(), getItemTitleColor() + getMinutes10());
+        ItemStack MINUTE_20ItemStack = InventoryHelper.createNewItemStack(getMinutes20Material(), getItemTitleColor() + getMinutes20());
+
+        InventoryHelper.setInventoryItem(inventory, 13, durationItemStack);
+        InventoryHelper.setInventoryItem(inventory, 21, MINUTE_10ItemStack);
+        InventoryHelper.setInventoryItem(inventory, 30, MINUTE_20ItemStack);
     }
 }

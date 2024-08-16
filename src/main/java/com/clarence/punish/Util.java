@@ -31,17 +31,21 @@ public class Util {
         }
         return stringBuilder;
     }
-    private static Calendar createCalender(int time) {
+    private static Calendar createMinCalender(int time) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, time);
         return cal;
     }
 
     public static void setBan(Player target, String banReason , int duration, String source) {
-        Calendar cal = createCalender(duration);
+        Calendar cal = createMinCalender(duration);
+        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was temporary banned."));
+        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in " + duration + " Minutes."));
         Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), source);
     }
     public static void setBan(Player target, String banReason, String source) {
+        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
+        target.kickPlayer(Util.Color("&7You were banned from this server for " + banReason + "."));
         Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, source);
     }
 }

@@ -6,11 +6,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class PunishCommand implements CommandExecutor {
-    public static ArrayList<UUID> uuid = new ArrayList<>();
+    //public static ArrayList<UUID> uuid = new ArrayList<>();
     //Command usage: /punish <player> <reason>
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
