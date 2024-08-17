@@ -11,11 +11,8 @@ public class Util {
     private final static String pluginPrefix = "[Punish] ";
     private final static String pluginColor = "&8";
 
-    private static int defaultTempBanDuration = 1;
-
     private static String stringBuilderMessage = null;
 
-    public static int getDefaultTempBanTimeDuration() { return defaultTempBanDuration; }
     private static String getPluginColor() { return pluginColor; }
     public static String getStringBuilderMessage() { return stringBuilderMessage; }
     public static String Color(String message) { return ChatColor.translateAlternateColorCodes('&', getPluginColor() + getPluginPrefix() +  "&f" + message); }
@@ -37,15 +34,19 @@ public class Util {
         return cal;
     }
 
-    public static void setBan(Player target, String banReason , int duration, String source) {
+    public static void setKick(Player target, String kickReason) {
+        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
+        target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
+    }
+    public static void setTemporaryBan(Player target, String banReason , int duration) {
         Calendar cal = createMinCalender(duration);
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was temporary banned."));
-        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in " + duration + " Minutes."));
-        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), source);
+        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Minutes."));
+        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), null);
     }
-    public static void setBan(Player target, String banReason, String source) {
+    public static void setPermanentBan(Player target, String banReason) {
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
         target.kickPlayer(Util.Color("&7You were banned from this server for " + banReason + "."));
-        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, source);
+        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
     }
 }

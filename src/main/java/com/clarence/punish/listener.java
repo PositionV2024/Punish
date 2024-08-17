@@ -1,6 +1,5 @@
 package com.clarence.punish;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,22 +36,32 @@ public class listener implements Listener {
             player.closeInventory();
             return;
         }
+
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getKickTitle())) {
-            target.kickPlayer(Util.Color("&7You have been kicked from the server for " + Util.getStringBuilderMessage()));
+            Util.setKick(target, Util.getStringBuilderMessage());
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
-            InventoryHelper.changeInventoryItem(event.getInventory(), Material.RED_STAINED_GLASS_PANE);
+            InventoryHelper.changeInventoryItem(event.getInventory(), InventoryHelper.getTempBanDecorationMaterial());
+            player.sendMessage(Util.Color("&7Changed inventory item."));
+            if (event.getCurrentItem() == null) {
+                return;
+            }
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getBanTitle())) {
-            Util.setBan(target, Util.getStringBuilderMessage(), null);
+            Util.setPermanentBan(target, Util.getStringBuilderMessage());
         }
 
-        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes10())) {
-            Util.setBan(target, Util.getStringBuilderMessage(), 10, null);
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())){
+            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 5);
         }
-        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes20())) {
-            Util.setBan(target, Util.getStringBuilderMessage(), 20, null);
+
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes10Title())) {
+            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 10);
         }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes20Title())) {
+            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 20);
+        }
+
         event.setCancelled(true);
     }
 
