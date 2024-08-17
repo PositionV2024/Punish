@@ -24,7 +24,7 @@ public class listener implements Listener {
 
         Player target = player.getServer().getPlayer(uuid);
 
-        if (!event.getView().getTitle().equalsIgnoreCase(InventoryHelper.getInventoryTitle())) {
+        if (!event.getView().getTitle().contains(InventoryHelper.getInventoryTitle())) {
             return;
         }
         if (event.getCurrentItem() == null) {
@@ -39,29 +39,46 @@ public class listener implements Listener {
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getKickTitle())) {
             Util.setKick(target, Util.getStringBuilderMessage());
+            return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
             InventoryHelper.changeInventoryItem(event.getInventory(), InventoryHelper.getTempBanDecorationMaterial());
-            player.sendMessage(Util.Color("&7Changed inventory item."));
             if (event.getCurrentItem() == null) {
                 return;
             }
+            event.setCancelled(true);
+            return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getBanTitle())) {
             Util.setBan(BanType.Permanent, null, target, Util.getStringBuilderMessage(), 0);
+            return;
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())){
             Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
+            return;
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes10Title())) {
             Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
+            return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes20Title())) {
             Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 20);
+            return;
         }
-
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours5Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 5);
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours10Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 10);
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours20Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 20);
+            return;
+        }
         event.setCancelled(true);
     }
 
@@ -72,7 +89,7 @@ public class listener implements Listener {
             //PunishCommand.uuid.remove(uuid);
         //}
     }
-    // if (!event.getView().getTitle().equalsIgnoreCase(InventoryHelper.getInventoryTitle())) {
+    // if (!event.getView().getTitle().containsIgnoreCase(InventoryHelper.getInventoryTitle())) {
     //     return;
     // }
 

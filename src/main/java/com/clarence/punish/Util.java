@@ -17,7 +17,6 @@ public class Util {
     public static String getStringBuilderMessage() { return stringBuilderMessage; }
     public static String Color(String message) { return ChatColor.translateAlternateColorCodes('&', getPluginColor() + getPluginPrefix() +  "&f" + message); }
     public static String getPluginPrefix() { return pluginPrefix; }
-
     public static StringBuilder stringBuilder(String totalLength[], int buildFrom) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -40,9 +39,8 @@ public class Util {
         }
         return cal;
     }
-
     public static void setKick(Player target, String kickReason) {
-        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
+        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was kicked."));
         target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
     }
     public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration) {
@@ -63,7 +61,7 @@ public class Util {
                 break;
             case Permanent:
                 Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
-                target.kickPlayer(Util.Color("&7You were banned from this server for " + banReason + "."));
+                target.kickPlayer(Util.Color("&7You were permanently banned from this server for " + banReason + "."));
                 Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
                 break;
         }

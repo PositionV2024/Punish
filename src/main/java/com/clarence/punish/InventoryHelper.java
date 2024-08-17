@@ -25,19 +25,21 @@ public class InventoryHelper {
             24, 33, 42};
 
     private final static String inventoryTitle = "Punishment GUI";
+
     private final static String kickTitle = "[Kick]";
     private final static String temporaryBanTitle = "[Temporary ban]";
-    private final static String banTitle = "[Ban]";
+    private final static String banTitle = "[Permanent ban]";
 
     private final static String MINUTES_5 = "[5 MINUTES]";
     private final static String MINUTES_10 = "[10 MINUTES]";
     private final static String MINUTES_20 = "[20 MINUTES]";
 
-    private final static String DecorationTitle = "LAST CONFIRMATION";
+    private final static String HOURS_5 = "[5 HOURS]";
+    private final static String HOURS_10 = "[10 HOURS]";
+    private final static String HOURS_20 = "[20 HOURS]";
 
     private final static String itemLoreColor = "" + ChatColor.BLUE;
     private final static String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
-    private final static String warningDecorationColor = "" + ChatColor.RED + ChatColor.BOLD;
 
     private final static Material defaultInventoryMaterial = Material.YELLOW_STAINED_GLASS_PANE;
     private final static Material reasonToBePunishment = Material.WRITABLE_BOOK;
@@ -46,12 +48,16 @@ public class InventoryHelper {
     private final static Material temporaryBanMaterial = Material.ENCHANTED_BOOK;
     private final static Material banMaterial = Material.ENCHANTED_BOOK;
     private final static Material typesOfPunishmentMaterial = Material.BOOK;
-    private final static Material durationMaterial = Material.GOLD_BLOCK;
     private final static Material tempBanDecorationMaterial = Material.RED_STAINED_GLASS_PANE;
 
-    private final static Material Minutes5Material = Material.BOOK;
-    private final static Material Minutes10Material = Material.BOOK;
-    private final static Material Minutes20Material = Material.BOOK;
+    private final static Material Minutes5Material = Material.ENCHANTED_BOOK;
+    private final static Material Minutes10Material = Material.ENCHANTED_BOOK;
+    private final static Material Minutes20Material = Material.ENCHANTED_BOOK;
+
+    private final static Material Hours5Material = Material.ENCHANTED_BOOK;
+    private final static Material Hours10Material = Material.ENCHANTED_BOOK;
+    private final static Material Hours20Material = Material.ENCHANTED_BOOK;
+
 
     public static Material getDefaultInventoryMaterial() {
         return defaultInventoryMaterial;
@@ -88,7 +94,6 @@ public class InventoryHelper {
     public static String getItemLoreColor() {
         return itemLoreColor;
     }
-    public static String getWarningDecorationColor() {return warningDecorationColor; }
 
     public static String getInventoryTitle() {
         return inventoryTitle;
@@ -112,8 +117,10 @@ public class InventoryHelper {
     public static String getMinutes20Title() {
         return MINUTES_20;
     }
-    public static String getDecorationTitle() { return DecorationTitle; }
-    public static Material getDurationMaterial() { return durationMaterial;}
+
+    public static String getHours5Title() { return HOURS_5; }
+    public static String getHours10Title() { return HOURS_10; }
+    public static String getHours20Title() { return HOURS_20; }
 
     public static Material getMinutes5Material() {return Minutes5Material; }
     public static Material getMinutes10Material() {
@@ -122,6 +129,11 @@ public class InventoryHelper {
     public static Material getMinutes20Material() {
         return Minutes20Material;
     }
+
+    public static Material getHours10Material() { return Hours10Material; }
+    public static Material getHours5Material() {return Hours5Material; }
+    public static Material getHours20Material() { return Hours20Material; }
+
     public static Material getTempBanDecorationMaterial() { return  tempBanDecorationMaterial; }
     public static int[] getDefaultDecorationInventorySlot() {return defaultDecorationInventorySlot; }
     public static int[] getDecorationInventorySlot() {return DecorationInventorySlot; }
@@ -182,16 +194,22 @@ public class InventoryHelper {
         clearItemIndex(inventory, 23);
 
         for (int i : getDecorationInventorySlot()) {
-            ItemStack itemStack = createNewItemStack(inventoryFrameMaterial,   getWarningDecorationColor() + getDecorationTitle());
+            ItemStack itemStack = createNewItemStack(inventoryFrameMaterial,  "", "");
             setInventoryItem(inventory, i, itemStack);
         }
         ItemStack MINUTE_5ItemStack = createNewItemStack(getMinutes5Material(), getItemTitleColor() + getMinutes5Title());
         ItemStack MINUTE_10ItemStack = createNewItemStack(getMinutes10Material(), getItemTitleColor() + getMinutes10Title());
         ItemStack MINUTE_20ItemStack = createNewItemStack(getMinutes20Material(), getItemTitleColor() + getMinutes20Title());
 
+        ItemStack HOURS_5ItemStack = createNewItemStack(getHours5Material(), getItemTitleColor() + getHours5Title());
+        ItemStack HOURS_10ItemStack = createNewItemStack(getHours10Material(), getItemTitleColor() + getHours10Title());
+        ItemStack HOURS_20ItemStack = createNewItemStack(getHours20Material(), getItemTitleColor() + getHours20Title());
 
         InventoryHelper.setInventoryItem(inventory, 12, MINUTE_5ItemStack);
         InventoryHelper.setInventoryItem(inventory, 21, MINUTE_10ItemStack);
         InventoryHelper.setInventoryItem(inventory, 30, MINUTE_20ItemStack);
+        InventoryHelper.setInventoryItem(inventory, 13,HOURS_5ItemStack);
+        InventoryHelper.setInventoryItem(inventory, 22,HOURS_10ItemStack);
+        InventoryHelper.setInventoryItem(inventory, 31,HOURS_20ItemStack);
     }
 }
