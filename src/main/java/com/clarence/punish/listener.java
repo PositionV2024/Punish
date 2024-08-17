@@ -48,18 +48,18 @@ public class listener implements Listener {
             }
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getBanTitle())) {
-            Util.setPermanentBan(target, Util.getStringBuilderMessage());
+            Util.setBan(BanType.Permanent, null, target, Util.getStringBuilderMessage(), 0);
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())){
-            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 5);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes10Title())) {
-            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 10);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes20Title())) {
-            Util.setTemporaryBan(target, Util.getStringBuilderMessage(), 20);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 20);
         }
 
         event.setCancelled(true);

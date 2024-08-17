@@ -33,6 +33,8 @@ public class InventoryHelper {
     private final static String MINUTES_10 = "[10 MINUTES]";
     private final static String MINUTES_20 = "[20 MINUTES]";
 
+    private final static String DecorationTitle = "LAST CONFIRMATION";
+
     private final static String itemLoreColor = "" + ChatColor.BLUE;
     private final static String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
     private final static String warningDecorationColor = "" + ChatColor.RED + ChatColor.BOLD;
@@ -110,6 +112,7 @@ public class InventoryHelper {
     public static String getMinutes20Title() {
         return MINUTES_20;
     }
+    public static String getDecorationTitle() { return DecorationTitle; }
     public static Material getDurationMaterial() { return durationMaterial;}
 
     public static Material getMinutes5Material() {return Minutes5Material; }
@@ -179,12 +182,13 @@ public class InventoryHelper {
         clearItemIndex(inventory, 23);
 
         for (int i : getDecorationInventorySlot()) {
-            ItemStack itemStack = createNewItemStack(inventoryFrameMaterial,   getWarningDecorationColor() + "LAST CONFIRMATION");
+            ItemStack itemStack = createNewItemStack(inventoryFrameMaterial,   getWarningDecorationColor() + getDecorationTitle());
             setInventoryItem(inventory, i, itemStack);
         }
         ItemStack MINUTE_5ItemStack = createNewItemStack(getMinutes5Material(), getItemTitleColor() + getMinutes5Title());
         ItemStack MINUTE_10ItemStack = createNewItemStack(getMinutes10Material(), getItemTitleColor() + getMinutes10Title());
         ItemStack MINUTE_20ItemStack = createNewItemStack(getMinutes20Material(), getItemTitleColor() + getMinutes20Title());
+
 
         InventoryHelper.setInventoryItem(inventory, 12, MINUTE_5ItemStack);
         InventoryHelper.setInventoryItem(inventory, 21, MINUTE_10ItemStack);

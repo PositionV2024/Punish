@@ -28,9 +28,16 @@ public class Util {
         }
         return stringBuilder;
     }
-    private static Calendar createMinCalender(int time) {
+    private static Calendar createCalender(int time, BanDuration banDuration) {
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, time);
+        switch (banDuration) {
+            case MINUTES:
+                cal.add(Calendar.MINUTE, time);
+                break;
+            case HOURS:
+                cal.add(Calendar.HOUR, time);
+                break;
+        }
         return cal;
     }
 
@@ -38,15 +45,27 @@ public class Util {
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
         target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
     }
-    public static void setTemporaryBan(Player target, String banReason , int duration) {
-        Calendar cal = createMinCalender(duration);
-        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was temporary banned."));
-        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Minutes."));
-        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), null);
-    }
-    public static void setPermanentBan(Player target, String banReason) {
-        Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
-        target.kickPlayer(Util.Color("&7You were banned from this server for " + banReason + "."));
-        Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
+    public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration) {
+        switch (banType) {
+            case Temporary:
+                Calendar cal = createCalender(duration, banDuration);
+                Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was temporary banned."));
+
+                switch (banDuration) {
+                    case MINUTES:
+                        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Minutes."));
+                        break;
+                    case HOURS:
+                        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Hours."));
+                        break;
+                }
+                Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), null);
+                break;
+            case Permanent:
+                Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was banned."));
+                target.kickPlayer(Util.Color("&7You were banned from this server for " + banReason + "."));
+                Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
+                break;
+        }
     }
 }
