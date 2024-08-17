@@ -36,6 +36,9 @@ public class Util {
             case HOURS:
                 cal.add(Calendar.HOUR, time);
                 break;
+            case DAYS:
+                cal.add(Calendar.DAY_OF_WEEK, time);
+                break;
         }
         return cal;
     }
@@ -55,6 +58,9 @@ public class Util {
                         break;
                     case HOURS:
                         target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Hours."));
+                        break;
+                    case DAYS:
+                        target.kickPlayer(Util.Color("&7You were temporary banned from this server for " + banReason + "." + " This ban will be lifted in &b&8" + duration + " Days."));
                         break;
                 }
                 Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, cal.getTime(), null);

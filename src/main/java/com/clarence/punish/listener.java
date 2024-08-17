@@ -14,12 +14,12 @@ public class listener implements Listener {
         Player player = (Player) event.getWhoClicked();
         //Player target = null;
         //for (UUID uuid : PunishCommand.uuid) {
-           // target = Bukkit.getServer().getPlayer(uuid);
-       // }
+        // target = Bukkit.getServer().getPlayer(uuid);
+        // }
         UUID uuid = (UUID) unique_identifier.getUUIDHashMap().get(player.getUniqueId());
 
         if (uuid == null) {
-           return;
+            return;
         }
 
         Player target = player.getServer().getPlayer(uuid);
@@ -54,7 +54,7 @@ public class listener implements Listener {
             return;
         }
 
-        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())){
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())) {
             Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
             return;
         }
@@ -77,6 +77,18 @@ public class listener implements Listener {
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours20Title())) {
             Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 20);
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay1Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 1);
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay2Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 5);
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay3Title())) {
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 10);
             return;
         }
         event.setCancelled(true);

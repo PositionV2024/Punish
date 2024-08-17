@@ -38,6 +38,10 @@ public class InventoryHelper {
     private final static String HOURS_10 = "[10 HOURS]";
     private final static String HOURS_20 = "[20 HOURS]";
 
+    private final static String DAY_1 = "[1 DAY]";
+    private final static String DAY_2 = "[5 DAYS]";
+    private final static String DAY_3 = "[10 DAYS]";
+
     private final static String itemLoreColor = "" + ChatColor.BLUE;
     private final static String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
 
@@ -58,6 +62,9 @@ public class InventoryHelper {
     private final static Material Hours10Material = Material.ENCHANTED_BOOK;
     private final static Material Hours20Material = Material.ENCHANTED_BOOK;
 
+    private final static Material Day1Material = Material.ENCHANTED_BOOK;
+    private final static Material Day2Material = Material.ENCHANTED_BOOK;
+    private final static Material Day3Material = Material.ENCHANTED_BOOK;
 
     public static Material getDefaultInventoryMaterial() {
         return defaultInventoryMaterial;
@@ -122,6 +129,10 @@ public class InventoryHelper {
     public static String getHours10Title() { return HOURS_10; }
     public static String getHours20Title() { return HOURS_20; }
 
+    public static String getDay1Title() { return DAY_1; }
+    public static String getDay2Title() { return DAY_2; }
+    public static String getDay3Title() { return DAY_3; }
+
     public static Material getMinutes5Material() {return Minutes5Material; }
     public static Material getMinutes10Material() {
         return Minutes10Material;
@@ -133,6 +144,10 @@ public class InventoryHelper {
     public static Material getHours10Material() { return Hours10Material; }
     public static Material getHours5Material() {return Hours5Material; }
     public static Material getHours20Material() { return Hours20Material; }
+
+    public static Material getDay1Material() {return Day1Material;}
+    public static Material getDay2Material() {return Day2Material;}
+    public static Material getDay3Material() {return Day3Material;}
 
     public static Material getTempBanDecorationMaterial() { return  tempBanDecorationMaterial; }
     public static int[] getDefaultDecorationInventorySlot() {return defaultDecorationInventorySlot; }
@@ -197,6 +212,7 @@ public class InventoryHelper {
             ItemStack itemStack = createNewItemStack(inventoryFrameMaterial,  "", "");
             setInventoryItem(inventory, i, itemStack);
         }
+
         ItemStack MINUTE_5ItemStack = createNewItemStack(getMinutes5Material(), getItemTitleColor() + getMinutes5Title());
         ItemStack MINUTE_10ItemStack = createNewItemStack(getMinutes10Material(), getItemTitleColor() + getMinutes10Title());
         ItemStack MINUTE_20ItemStack = createNewItemStack(getMinutes20Material(), getItemTitleColor() + getMinutes20Title());
@@ -205,11 +221,20 @@ public class InventoryHelper {
         ItemStack HOURS_10ItemStack = createNewItemStack(getHours10Material(), getItemTitleColor() + getHours10Title());
         ItemStack HOURS_20ItemStack = createNewItemStack(getHours20Material(), getItemTitleColor() + getHours20Title());
 
+        ItemStack DAY_1temStack = createNewItemStack(getDay1Material(), getItemTitleColor() + getDay1Title());
+        ItemStack DAY_2temStack = createNewItemStack(getDay2Material(), getItemTitleColor() + getDay2Title());
+        ItemStack DAY_3temStack = createNewItemStack(getDay3Material(), getItemTitleColor() + getDay3Title());
+
         InventoryHelper.setInventoryItem(inventory, 12, MINUTE_5ItemStack);
         InventoryHelper.setInventoryItem(inventory, 21, MINUTE_10ItemStack);
         InventoryHelper.setInventoryItem(inventory, 30, MINUTE_20ItemStack);
+
         InventoryHelper.setInventoryItem(inventory, 13,HOURS_5ItemStack);
         InventoryHelper.setInventoryItem(inventory, 22,HOURS_10ItemStack);
         InventoryHelper.setInventoryItem(inventory, 31,HOURS_20ItemStack);
+
+        InventoryHelper.setInventoryItem(inventory, 14,DAY_1temStack);
+        InventoryHelper.setInventoryItem(inventory, 23,DAY_2temStack);
+        InventoryHelper.setInventoryItem(inventory, 32,DAY_3temStack);
     }
 }
