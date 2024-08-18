@@ -12,7 +12,7 @@ Free download: https://builtbybit.com/resources/punish.50069
 ## New updates
 <details> 
     <summary> Punishment plugin 1.2 <summary>
-    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID.</summary>
+    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID.
 </details>
 <details>
     https://www.youtube.com/watch?v=gRA8qIQiba8
