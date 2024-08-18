@@ -11,6 +11,11 @@ Free download: https://builtbybit.com/resources/punish.50069
 #
 [![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "YouTube video")
 
+## New updates
+<details>
+    <summary>Update 1.1</summary>
+    https://youtu.be/N6Qjf84nf14
+</details>
 
 ## Command usage:
     /punish <player> <reason>
