@@ -10,9 +10,11 @@ Free download: https://builtbybit.com/resources/punish.50069
 [![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "YouTube video")
 
 ## New updates
+<details> 
+    <summary> Punishment plugin 1.2 <summary>
+    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID.</summary>
+</details>
 <details>
-    <summary>Punishment plugin 1.2</summary>
-    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID.
     https://www.youtube.com/watch?v=gRA8qIQiba8
     <summary>Punishment plugin version 1.1</summary>
     In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
