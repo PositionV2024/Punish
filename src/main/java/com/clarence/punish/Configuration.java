@@ -29,7 +29,7 @@ public class Configuration {
     public static void addPlayerUUID(Player target, String reason, BanType banType) {
 
          String prefixPath = "Punishments";
-        String uuidPath = prefixPath + ".";
+        String uuidPath = prefixPath + "." + target.getUniqueId();
         String reasonPath = prefixPath + ".reason";
         String bantypePath = prefixPath + ".punishment_type";
 
