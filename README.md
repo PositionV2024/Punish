@@ -11,7 +11,8 @@ Free download: https://builtbybit.com/resources/punish.50069
 
 ## New updates
 <details>
-    <summary>Update 1.1</summary>
+    <summary>Punishment plugin version 1.1</summary>
+    In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
     [![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://youtu.be/N6Qjf84nf14 "YouTube video")
 </details>
 
