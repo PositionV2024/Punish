@@ -12,7 +12,7 @@ Free download: https://builtbybit.com/resources/punish.50069
 ## New updates
 <details>
     <summary>Update 1.1</summary>
-    [![](https://youtu.be/N6Qjf84nf14 "YouTube video")
+    [![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://youtu.be/N6Qjf84nf14 "YouTube video")
 </details>
 
 ## Command usage:
