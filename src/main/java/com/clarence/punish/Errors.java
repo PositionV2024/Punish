@@ -14,6 +14,5 @@ public class Errors {
     public static String getInvalidArugments() { return INVALID_ARUGMENTS; }
     public static String getNoConsoleSender() { return NO_CONSOLE_SENDER; }
     public static String getNoPermission() { return NO_PERMISSION; }
-
     private static String getErrorColor() { return errorColor; }
 }

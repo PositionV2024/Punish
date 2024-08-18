@@ -6,3 +6,4 @@ Punishments:
       - punishment_type:
       - reason:
       - duration:
+      - punishmentDuration:
