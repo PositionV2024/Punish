@@ -4,7 +4,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.UUID;
 
 public class Configuration {
 
@@ -27,21 +26,34 @@ public class Configuration {
         punish.saveDefaultConfig();
     }
 
-    public static void addPlayerUUID(List<String> configList, Player target, String reason, BanType banType) {
-        UUID targetUUID = target.getUniqueId();
+    public static void addPlayerUUID(Player target, String reason, BanType banType) {
 
-        String eachUUID = String.valueOf(targetUUID);
+         String prefixPath = "Punishments";
+        String uuidPath = prefixPath + ".";
+        String reasonPath = prefixPath + ".reason";
+        String bantypePath = prefixPath + ".punishment_type";
 
-        configList = getConfig().getStringList("userUUID/name");
+        List<String> PathToUUID = getConfig().getStringList(uuidPath);
+        List<String> PathToReason = getConfig().getStringList(reasonPath);
+        List<String> PathToBanType = getConfig().getStringList(bantypePath);
 
-        if (configList.contains(eachUUID)) {
-            System.out.println(Util.getPluginPrefix() + "Couldn't add " + targetUUID + " to the config.yml. Copies DETECTED.");
+        String eachUUID = String.valueOf(target.getUniqueId());
+
+        if (PathToUUID.contains(eachUUID)) {
+            System.out.println(Util.getPluginPrefix() + "Couldn't add " + target.getUniqueId() + " to the config.yml. Copies DETECTED.");
             return;
         }
 
-        configList.add(eachUUID);
-        punish.getConfig().set("userUUID/name", configList);
+        PathToUUID.add(eachUUID);
+        PathToReason.add(reason);
+        PathToBanType.add(String.valueOf(banType).toUpperCase());
+
+        punish.getConfig().set(uuidPath, PathToUUID);
+        punish.getConfig().set(reasonPath, PathToReason);
+        punish.getConfig().set(bantypePath, PathToBanType);
+
         punish.saveConfig();
-        System.out.println(Util.getPluginPrefix() +"Added " + target.getDisplayName() + " (" + targetUUID + ") " + "to the config.yml file.");
+
+        System.out.println(Util.getPluginPrefix() +"Added " + target.getDisplayName() + " (" + target.getUniqueId() + ") " + "to the config.yml file.");
     }
 }

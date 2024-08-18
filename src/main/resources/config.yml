@@ -1,5 +1,5 @@
 # ALL THE PUNISHED PLAYERS WILL BE HERE
 
-userUUID:
-  name:
-  reason:
+Punishments:
+  - reason:
+  - punishment_type:
