@@ -45,7 +45,7 @@ public class Util {
     public static void setKick(Player target, String kickReason) {
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was kicked."));
         target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
-        Configuration.addPlayerUUID(target, kickReason, BanType.Kick);
+        Configuration.addPlayerUUID(target, kickReason, BanType.Kick, 0);
     }
     public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration) {
         switch (banType) {
@@ -72,6 +72,6 @@ public class Util {
                 Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
                 break;
         }
-        Configuration.addPlayerUUID(target, banReason, banType);
+        Configuration.addPlayerUUID(target, banReason, banType, duration);
     }
 }

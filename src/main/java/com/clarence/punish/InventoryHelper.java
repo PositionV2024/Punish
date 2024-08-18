@@ -161,7 +161,7 @@ public class InventoryHelper {
         playerOpenInventory(player, inventory);
     }
     public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
-        Inventory inventory = Bukkit.createInventory(null, 54, invTitle);
+        Inventory inventory = Bukkit.createInventory(null, 45, invTitle);
         for (int i : getDefaultDecorationInventorySlot()) {
             ItemStack itemStack = createNewItemStack(inventoryFrameMaterial, "", "");
             setInventoryItem(inventory, i, itemStack);

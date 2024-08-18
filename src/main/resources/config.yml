@@ -1,5 +1,8 @@
 # ALL THE PUNISHED PLAYERS WILL BE HERE
 
 Punishments:
-  - reason:
-  - punishment_type:
+  - playerUUID:
+      - name:
+      - punishment_type:
+      - reason:
+      - duration:

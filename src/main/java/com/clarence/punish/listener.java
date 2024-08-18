@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.UUID;
 
@@ -97,27 +98,15 @@ public class listener implements Listener {
     @EventHandler
     public void onInventoryCloseEvent(InventoryCloseEvent event) {
         unique_identifier.getUUIDHashMap().remove(event.getPlayer().getUniqueId());
-        //for (UUID uuid : PunishCommand.uuid) {
-            //PunishCommand.uuid.remove(uuid);
-        //}
     }
-    // if (!event.getView().getTitle().containsIgnoreCase(InventoryHelper.getInventoryTitle())) {
-    //     return;
-    // }
-
-    // UUID uuid = (UUID) unique_identifier.getUUIDHashMap().get(event.getPlayer().getUniqueId());
-
-    // if (uuid == null) {
-    //     System.out.println(Util.Color(Util.getPluginPrefix() + " The UUID is INVALID."));
-    //     return;
-    // }
-
-    // Player target = Bukkit.getServer().getPlayer((uuid));
-    // unique_identifier.getUUIDHashMap().remove(event.getPlayer().getUniqueId());
-
-    // if (target == null) {
-    //     return;
-    // }
-
-    // event.getPlayer().sendMessage(Util.Color("&7You have stopped punishing " +  target.getDisplayName() + "."));
+    @EventHandler
+    public void onPlayerJoinEvent(PlayerJoinEvent event) {
+        if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId().toString())) {
+            System.out.println(event.getPlayer().getDisplayName() + " is not in the punished list");
+            return;
+        }
+        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId().toString(), null);
+        Configuration.punish.saveConfig();
+        System.out.println(event.getPlayer().getDisplayName() + " is removed from the config.yml");
+    }
 }

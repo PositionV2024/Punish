@@ -26,31 +26,42 @@ public class Configuration {
         punish.saveDefaultConfig();
     }
 
-    public static void addPlayerUUID(Player target, String reason, BanType banType) {
+    public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration) {
 
-         String prefixPath = "Punishments";
-        String uuidPath = prefixPath + "." + target.getUniqueId();
-        String reasonPath = prefixPath + ".reason";
-        String bantypePath = prefixPath + ".punishment_type";
+         List<String> PathToPlayerUUID = getConfig().getStringList("Punishments" + ".");
+        List<String> PathToPlayername = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
+        List<String> PathToReason = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
+        List<String> PathToPunishmentType = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
+        List<String> PathToDuration = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
 
-        List<String> PathToUUID = getConfig().getStringList(uuidPath);
-        List<String> PathToReason = getConfig().getStringList(reasonPath);
-        List<String> PathToBanType = getConfig().getStringList(bantypePath);
+        switch (punishment_type) {
+            case Kick:
+            case Temporary:
+                PathToPlayerUUID.add(target.getUniqueId().toString());
+                PathToPlayername.add(target.getDisplayName());
+                PathToReason.add(reason);
+                PathToPunishmentType.add(punishment_type.toString());
+                PathToDuration.add(String.valueOf(duration));
 
-        String eachUUID = String.valueOf(target.getUniqueId());
+                getConfig().set("Punishments" + "." + target.getUniqueId(), PathToPlayerUUID);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PathToPlayername);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", PathToReason);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PathToPunishmentType);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", PathToDuration);
+                break;
+            case Permanent:
+                PathToPlayerUUID.add(target.getUniqueId().toString());
+                PathToPlayername.add(target.getDisplayName());
+                PathToReason.add(reason);
+                PathToPunishmentType.add(punishment_type.toString());
+                PathToDuration.add(String.valueOf(duration));
 
-        if (PathToUUID.contains(eachUUID)) {
-            System.out.println(Util.getPluginPrefix() + "Couldn't add " + target.getUniqueId() + " to the config.yml. Copies DETECTED.");
-            return;
+                getConfig().set("Punishments" + "." + target.getUniqueId(), PathToPlayerUUID);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PathToPlayername);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", PathToReason);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PathToPunishmentType);
+                break;
         }
-
-        PathToUUID.add(eachUUID);
-        PathToReason.add(reason);
-        PathToBanType.add(String.valueOf(banType).toUpperCase());
-
-        punish.getConfig().set(uuidPath, PathToUUID);
-        punish.getConfig().set(reasonPath, PathToReason);
-        punish.getConfig().set(bantypePath, PathToBanType);
 
         punish.saveConfig();
 
