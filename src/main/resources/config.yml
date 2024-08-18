@@ -7,3 +7,5 @@ Punishments:
       - reason:
       - duration:
       - punishmentDuration:
+      - punishmentDate:
+      - punishedBy:

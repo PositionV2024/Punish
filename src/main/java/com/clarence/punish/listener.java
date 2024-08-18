@@ -39,7 +39,7 @@ public class listener implements Listener {
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getKickTitle())) {
-            Util.setKick(target, Util.getStringBuilderMessage());
+            Util.setKick(target, Util.getStringBuilderMessage(), player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
@@ -51,45 +51,45 @@ public class listener implements Listener {
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getBanTitle())) {
-            Util.setBan(BanType.Permanent, null, target, Util.getStringBuilderMessage(), 0);
+            Util.setBan(BanType.Permanent, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 0, player);
             return;
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes5Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5, player);
             return;
         }
 
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes10Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 5, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getMinutes20Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 20);
+            Util.setBan(BanType.Temporary, BanDuration.MINUTES, target, Util.getStringBuilderMessage(), 20, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours5Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 5);
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 5, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours10Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 10);
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 10, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getHours20Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 20);
+            Util.setBan(BanType.Temporary, BanDuration.HOURS, target, Util.getStringBuilderMessage(), 20, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay1Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 1);
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 1, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay2Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 5);
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 5, player);
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getDay3Title())) {
-            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 10);
+            Util.setBan(BanType.Temporary, BanDuration.DAYS, target, Util.getStringBuilderMessage(), 10, player);
             return;
         }
         event.setCancelled(true);
@@ -101,12 +101,13 @@ public class listener implements Listener {
     }
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId().toString())) {
-            System.out.println(event.getPlayer().getDisplayName() + " is not in the punished list");
-            return;
-        }
-        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId().toString(), null);
-        Configuration.punish.saveConfig();
-        System.out.println(event.getPlayer().getDisplayName() + " is removed from the config.yml");
+         if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId())) {
+                System.out.println(event.getPlayer().getDisplayName() + " is not in the punished list");
+                return;
+            }
+
+         Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId(), null);
+         Configuration.punish.saveConfig();
+         System.out.println(event.getPlayer().getDisplayName() + " is removed from the config.yml");
     }
 }

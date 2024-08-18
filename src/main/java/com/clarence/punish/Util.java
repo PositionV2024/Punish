@@ -42,12 +42,12 @@ public class Util {
         }
         return cal;
     }
-    public static void setKick(Player target, String kickReason) {
+    public static void setKick(Player target, String kickReason, Player whoKickedTarget) {
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was kicked."));
         target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
-        Configuration.addPlayerUUID(target, kickReason, BanType.Kick, 0, BanDuration.DAYS);
+        Configuration.addPlayerUUID(target, kickReason, BanType.Kick, 0, BanDuration.DAYS, whoKickedTarget);
     }
-    public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration) {
+    public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration, Player whoKickedTarget) {
         switch (banType) {
             case Temporary:
                 Calendar cal = createCalender(duration, banDuration);
@@ -72,6 +72,6 @@ public class Util {
                 Bukkit.getBanList(BanList.Type.NAME).addBan(target.getDisplayName(), banReason, null, null);
                 break;
         }
-        Configuration.addPlayerUUID(target, banReason, banType, duration, banDuration);
+        Configuration.addPlayerUUID(target, banReason, banType, duration, banDuration, whoKickedTarget);
     }
 }
