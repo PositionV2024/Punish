@@ -4,8 +4,6 @@ Punishment awaits naughty Minecraft players. Punish players that you think are b
 Free download: https://builtbybit.com/resources/punish.50069
 #
 ![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png "Plugin picture")
-
-![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Screenshot%202024-08-18%20022802.png "Second plugin picture")
 #
 ![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif "Gif")
 #
