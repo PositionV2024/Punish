@@ -10,6 +10,7 @@ public final class Punish extends JavaPlugin {
         System.out.println(Util.getPluginPrefix() + "has been launched.");
         Bukkit.getPluginManager().registerEvents(new listener(), this);
         getCommand("punish").setExecutor(new PunishCommand());
+        getCommand("punish").setTabCompleter(new PunishTabCompleter());
     }
     @Override
     public void onDisable() {
