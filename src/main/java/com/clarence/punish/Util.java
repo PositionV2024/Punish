@@ -45,7 +45,7 @@ public class Util {
     public static void setKick(Player target, String kickReason, Player whoKickedTarget) {
         Bukkit.broadcastMessage(Util.Color(target.getDisplayName() + " &7was kicked."));
         target.kickPlayer(Util.Color("&7You were kicked from this server for " + kickReason + "."));
-        Configuration.addPlayerUUID(target, kickReason, BanType.Kick, 0, BanDuration.DAYS, whoKickedTarget);
+        Configuration.addPlayerUUID(target, kickReason, BanType.Kick, 0, BanDuration.MINUTES, whoKickedTarget);
     }
     public static void setBan(BanType banType, BanDuration banDuration, Player target, String banReason , int duration, Player whoKickedTarget) {
         switch (banType) {

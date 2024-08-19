@@ -27,16 +27,16 @@ public class Configuration {
         punish.saveDefaultConfig();
     }
 
-    public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player whoKickedTarget) {
+    public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player Punishedby) {
 
-         List<String> PathToPlayerUUID = getConfig().getStringList("Punishments" + ".");
-        List<String> PathToPlayername = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
-        List<String> PathToReason = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
-        List<String> PathToPunishmentType = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
-        List<Integer> PathToDuration = getConfig().getIntegerList("Punishments" + "." + target.getUniqueId() + ".duration");
-        List<String> PathTopunishmentDuration = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".durationType");
-        List<String> PathTounpunishmentDate = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
-        List<String> PathToPunishBy = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
+         List<String> MainPath = getConfig().getStringList("Punishments" + ".");
+        List<String> PlayerNamePath = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
+        List<String> ReasonPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
+        List<String> PunishmentTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
+        List<Integer> DurationPath = getConfig().getIntegerList("Punishments" + "." + target.getUniqueId() + ".duration");
+        List<String> durationTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".durationType");
+        List<String> releaseDatePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
+        List<String> punishByPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
         if (getConfig().contains("Punishments" + "." + target.getUniqueId())) {
             System.out.println(Util.getPluginPrefix() + "You are already in the punishments list.");
@@ -57,36 +57,35 @@ public class Configuration {
                 break;
         }
 
-        PathToPlayerUUID.add(target.getUniqueId().toString());
-        PathToPlayername.add(target.getDisplayName());
-        PathToReason.add(reason);
-        PathToPunishmentType.add(punishment_type.toString());
-        PathToDuration.add(duration);
-        PathTounpunishmentDate.add(cal.getTime().toString());
-        PathToPunishBy.add(whoKickedTarget.getDisplayName());
-        PathTopunishmentDuration.add(durationType.toString());
+        MainPath.add(target.getUniqueId().toString());
+        PlayerNamePath.add(target.getDisplayName());
+        ReasonPath.add(reason);
+        PunishmentTypePath.add(punishment_type.toString());
+        DurationPath.add(duration);
+        releaseDatePath.add(cal.getTime().toString());
+        punishByPath.add(Punishedby.getDisplayName());
+        durationTypePath.add(durationType.toString());
 
-        getConfig().set("Punishments" + "." + target.getUniqueId(), PathToPlayerUUID);
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PathToPlayername);
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", PathToReason);
+        getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
+        getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
+        getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
 
         switch (punishment_type) {
             case Kick:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PathToPunishmentType);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", PathToDuration);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", PathTounpunishmentDate);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", durationTypePath);
                 break;
             case Temporary:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PathToPunishmentType);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", PathToDuration);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", PathTopunishmentDuration);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", PathTounpunishmentDate);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", durationTypePath);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
                 break;
             case Permanent:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PathToPunishmentType);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 break;
         }
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishedBy", PathToPunishBy);
+        getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
 
         punish.saveConfig();
 

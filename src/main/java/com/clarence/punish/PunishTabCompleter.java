@@ -25,6 +25,9 @@ public class PunishTabCompleter implements TabCompleter {
            commonReason.add("Xraying");
            commonReason.add("Griefing");
            commonReason.add("Spamming");
+           commonReason.add("Flying");
+           commonReason.add("Bullying others");
+           commonReason.add("Harassment");
 
            return StringUtil.copyPartialMatches(args[1], commonReason, new ArrayList<>());
        }
