@@ -12,7 +12,7 @@ Free download: https://builtbybit.com/resources/punish.50069
 ## New updates
 <details>
     <summary>Punishment v1..3</summary>
-    In this update, I have enhanced the information that is stored to the configuration file. Players that were punished one or multiple times, will be shown to the configuration file. It will not delete the data that was stored in the configuration file even after the punished player is back on the server.
+    In this update, I have enhanced the information that is stored to the configuration file. Players that were punished once or multiple times, will be shown to the configuration file. It will not delete the data that was stored in the configuration file even after the punished player is back on the server.
     https://youtu.be/RU1uzAHubz4
 </details>
 <details> 
