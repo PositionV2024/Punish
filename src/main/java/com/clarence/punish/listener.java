@@ -101,13 +101,15 @@ public class listener implements Listener {
     }
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-         if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId())) {
+         if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId() + ".reason")) {
                 System.out.println(event.getPlayer().getDisplayName() + " is not in the punished list");
                 return;
             }
-
-         Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId(), null);
+         Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".reason", null);
+        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".duration", null);
+        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".duration_type", null);
+        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".releaseDate", null);
          Configuration.punish.saveConfig();
-         System.out.println(event.getPlayer().getDisplayName() + " is removed from the config.yml");
+         System.out.println(event.getPlayer().getDisplayName() + "'s punishment reason is removed from the config.yml");
     }
 }

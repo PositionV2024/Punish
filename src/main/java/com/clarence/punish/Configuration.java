@@ -34,11 +34,11 @@ public class Configuration {
         List<String> ReasonPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
         List<String> PunishmentTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
         List<Integer> DurationPath = getConfig().getIntegerList("Punishments" + "." + target.getUniqueId() + ".duration");
-        List<String> durationTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".durationType");
+        List<String> durationTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".duration_type");
         List<String> releaseDatePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
         List<String> punishByPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
-        if (getConfig().contains("Punishments" + "." + target.getUniqueId())) {
+        if (getConfig().contains("Punishments" + "." + target.getUniqueId() + ".reason")) {
             System.out.println(Util.getPluginPrefix() + "You are already in the punishments list.");
             return;
         }
@@ -63,7 +63,7 @@ public class Configuration {
         PunishmentTypePath.add(punishment_type.toString());
         DurationPath.add(duration);
         releaseDatePath.add(cal.getTime().toString());
-        punishByPath.add(Punishedby.getDisplayName());
+        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + " )");
         durationTypePath.add(durationType.toString());
 
         getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
@@ -72,17 +72,14 @@ public class Configuration {
 
         switch (punishment_type) {
             case Kick:
+            case Permanent:
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", durationTypePath);
                 break;
             case Temporary:
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".durationType", durationTypePath);
+                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration_type", durationTypePath);
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
-                break;
-            case Permanent:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 break;
         }
         getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
