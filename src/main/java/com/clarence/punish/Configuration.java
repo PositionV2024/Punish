@@ -60,7 +60,7 @@ public class Configuration {
         PunishmentTypePath.add(punishment_type.toString());
         DurationPath.add(duration + " (" + durationType + ")");
         releaseDatePath.add(cal.getTime().toString());
-        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + ")" + " " + target.getUniqueId());
+        punishByPath.add(Punishedby.getDisplayName());
 
         //getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
         getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
