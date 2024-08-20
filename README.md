@@ -13,7 +13,6 @@ Free download: https://builtbybit.com/resources/punish.50069
 <details>
     <summary>v1.4-SHAPSHOT</summary>
     In this update, I have integated a system where it will ask you to download the latest version of the plugin if you are on an older version.
-    https://youtu.be/RU1uzAHubz4
 </details>
 <details>
     <summary>v1.3-SHAPSHOT</summary>
