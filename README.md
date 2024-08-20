@@ -10,13 +10,18 @@ Free download: https://builtbybit.com/resources/punish.50069
 [![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "YouTube video")
 
 ## New updates
+<details>
+    <summary>Punishment version 1.3</summary>
+    In this update, I have enhanced the information that is stored to the configuration file. Players that were punished once or multiple times, will be shown to the configuration file. It will not delete the data that was stored in the configuration file even after the punished player is back on the server.
+    https://youtu.be/RU1uzAHubz4
+</details>
 <details> 
-    <summary>Punishment v1.2</summary>
+    <summary>Punishment version 1.2</summary>
     In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID. The configuration file will not allow copies of banned player's UUID 
     https://www.youtube.com/watch?v=gRA8qIQiba8
 </details>
 <details>
-    <summary>Punishment v1.1</summary>
+    <summary>Punishment version 1.1</summary>
     In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
     https://youtu.be/N6Qjf84nf14
 </details>
