@@ -1,6 +1,7 @@
 package com.clarence.punish;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,29 +22,29 @@ public class PunishCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!(player.hasPermission(Permission.Usage.getName()))) {
-            player.sendMessage(Util.Color(Errors.getNoPermission()));
+            sendMessage(player, Util.Color(Errors.getNoPermission()));
             return true;
         }
 
         if (args.length == 0) {
-            player.sendMessage(Util.Color(Errors.getInvalidArugments()));
+            sendMessage(player, ChatColor.RED + Errors.getInvalidArugments());
             return true;
         }
 
-        Player target = Bukkit.getPlayerExact(args[0]);
-
-        if (target == null) {
-            player.sendMessage(Util.Color(Errors.getInvalidTarget()));
-            return true;
+        switch (args[0].toLowerCase()) {
+            case "version":
+                updateChecker(player, Util.Color("&7Your current version is " + Punish.getUpdateChecker().getCurrentVersion() + "\n" +
+                        "There is a latest version." +
+                        " Please download the latest version " +
+                        "for more improvements: &2" + Punish.getUpdateChecker().getUpdateUrl()));
+                break;
+            case "lookup":
+                getConfigurationList(player, args);
+                break;
+            default:
+                setTargetPunished(player, args);
+                break;
         }
-
-        //if (target == player) {
-        //    player.sendMessage(Util.Color("&4You can't punish yourself."));
-        //    return true;
-        //}
-
-        handleInventory(player, target, args);
-
         return true;
     }
     void handleInventory(Player player, Player target, String args[]) {
@@ -72,5 +73,36 @@ public class PunishCommand implements CommandExecutor {
         StringBuilder stringBuilder = Util.stringBuilder(args, 1);
 
         InventoryHelper inventoryHelper = new InventoryHelper(player, target);
+    }
+
+    public void sendMessage(Player player, String message) {
+        player.sendMessage(message);
+    }
+    public void getConfigurationList(Player player, String[] args) {
+        if (args.length == 1) {
+            sendMessage(player, Util.Color(Errors.getInvalidTarget()));
+            return;
+        }
+
+        sendMessage(player, Util.Color("&7 Player name: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".name")));
+        sendMessage(player, "Reason for punishment: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".reason"));
+        sendMessage(player, "Punishment_type: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".punishment_type"));
+        sendMessage(player, "Duration: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".duration"));
+    }
+    public void setTargetPunished(Player player, String[] args){
+        Player target = Bukkit.getPlayerExact(args[0]);
+
+        if (target == null) {
+            player.sendMessage(Util.Color(Errors.getInvalidTarget()));
+            return;
+        }
+        handleInventory(player, target, args);
+    }
+    public void updateChecker(Player player, String message) {
+        if (Punish.getUpdateChecker().isUpdateAvailable()) {
+            sendMessage(player, message);
+            return;
+        }
+        sendMessage(player, Util.Color("&7Your current version is the latest."));
     }
 }

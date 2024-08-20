@@ -1,6 +1,7 @@
 package com.clarence.punish;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -14,13 +15,19 @@ public class PunishTabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
        if (args.length == 1) {
-           List<String> playerNames = new ArrayList<>();
+           List<String> options = new ArrayList<>();
+           options.add("version");
+           options.add("lookup");
+
            for (Player player : Bukkit.getOnlinePlayers()) {
-               playerNames.add(player.getDisplayName());
+               options.add(player.getDisplayName());
            }
-           return StringUtil.copyPartialMatches(args[0], playerNames, new ArrayList<>());
+           return StringUtil.copyPartialMatches(args[0], options, new ArrayList<>());
        } else if (args.length == 2) {
            List<String> commonReason = new ArrayList<>();
+           for (OfflinePlayer uuid : Bukkit.getServer().getOfflinePlayers()) {
+               commonReason.add(uuid.getUniqueId().toString());
+           }
            commonReason.add("Hacking");
            commonReason.add("Xraying");
            commonReason.add("Griefing");
@@ -28,6 +35,7 @@ public class PunishTabCompleter implements TabCompleter {
            commonReason.add("Flying");
            commonReason.add("Bullying others");
            commonReason.add("Harassment");
+
 
            return StringUtil.copyPartialMatches(args[1], commonReason, new ArrayList<>());
        }

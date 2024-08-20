@@ -1,12 +1,10 @@
 package com.clarence.punish;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.UUID;
 
@@ -100,22 +98,4 @@ public class listener implements Listener {
     public void onInventoryCloseEvent(InventoryCloseEvent event) {
         unique_identifier.getUUIDHashMap().remove(event.getPlayer().getUniqueId());
     }
-    @EventHandler
-    public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-
-        player.sendMessage(Util.Color("&7is on version " + Bukkit.getPluginManager().getPlugin("Punish").getDescription().getVersion()));
-
-         if (!Configuration.getConfig().contains("Punishments" + "." + player.getUniqueId() + ".reason")) {
-                System.out.println(player.getDisplayName() + " is not in the punished list");
-                return;
-            }
-         Configuration.getConfig().set("Punishments" + "." + player.getUniqueId() + ".reason", null);
-        Configuration.getConfig().set("Punishments" + "." +  player.getUniqueId() + ".duration", null);
-        Configuration.getConfig().set("Punishments" + "." +  player.getUniqueId() + ".releaseDate", null);
-
-         Configuration.punish.saveConfig();
-         System.out.println(event.getPlayer().getDisplayName() + "'s punishment reason is removed from the config.yml");
-    }
-
 }

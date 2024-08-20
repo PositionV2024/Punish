@@ -5,7 +5,7 @@ public class Errors {
 
     private static String NO_CONSOLE_SENDER = "You can't access this command through CONSOLE";
     private static String NO_PERMISSION = getErrorColor() + "You do not have permission to use this command.";
-    private static String INVALID_ARUGMENTS = getErrorColor() + "Command usage: /punish <player> <reason>";
+    private static String INVALID_ARUGMENTS = "Command usage: /punish <player> <reason>\nCommand usage: /punish version";
     private static String INVALID_TARGET = getErrorColor() + "The targeted player is offline or does not exist.";
     private static String PUNISHMENT_REASON = getErrorColor() + "Enter a reason for the punishment.";
 

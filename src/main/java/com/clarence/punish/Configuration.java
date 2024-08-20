@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Configuration {
-
      public static Punish punish;
 
      public static FileConfiguration getConfig() {
@@ -29,7 +28,7 @@ public class Configuration {
 
     public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player Punishedby) {
 
-         List<String> MainPath = getConfig().getStringList("Punishments" + ".");
+         List<String> MainPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId());
         List<String> PlayerNamePath = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
         List<String> ReasonPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
         List<String> PunishmentTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
@@ -37,11 +36,10 @@ public class Configuration {
         List<String> releaseDatePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
         List<String> punishByPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
-        if (getConfig().contains("Punishments" + "." + target.getUniqueId() + ".reason")) {
-            System.out.println(Util.getPluginPrefix() + "You are already in the punishments list.");
-            return;
-        }
-
+       //if (getConfig().contains("Punishments" + "." + target.getUniqueId() + ".reason")) {
+       //    System.out.println(Util.getPluginPrefix() + "You are already in the punishments list.");
+       //    return;
+       //}
         Calendar cal = Calendar.getInstance();
 
         switch (durationType) {
@@ -56,15 +54,15 @@ public class Configuration {
                 break;
         }
 
-        MainPath.add(target.getUniqueId().toString());
+       // MainPath.add(target.getUniqueId().toString());
         PlayerNamePath.add(target.getDisplayName());
         ReasonPath.add(reason);
         PunishmentTypePath.add(punishment_type.toString());
         DurationPath.add(duration + " (" + durationType + ")");
         releaseDatePath.add(cal.getTime().toString());
-        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + ")");
+        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + ")" + " " + target.getUniqueId());
 
-        getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
+        //getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
         getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
         getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
 
