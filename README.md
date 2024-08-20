@@ -13,6 +13,8 @@ Free download: https://builtbybit.com/resources/punish.50069
 <details>
     <summary>v1.4-SHAPSHOT</summary>
     In this update, I have integated a system where it will ask you to download the latest version of the plugin if you are on an older version.
+ E.g, ```[11:28:45] [Server thread/WARN]: [Punish] New version available: v1.5-SHAPSHOT (current: v1.4-SNAPSHOT)
+Download it at https://github.com/PositionV2024/Punish/releases/latest```
 </details>
 <details>
     <summary>v1.3-SHAPSHOT</summary>
