@@ -1,5 +1,6 @@
 package com.clarence.punish;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -101,15 +102,20 @@ public class listener implements Listener {
     }
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-         if (!Configuration.getConfig().contains("Punishments" + "." + event.getPlayer().getUniqueId() + ".reason")) {
-                System.out.println(event.getPlayer().getDisplayName() + " is not in the punished list");
+        Player player = event.getPlayer();
+
+        player.sendMessage(Util.Color("&7is on version " + Bukkit.getPluginManager().getPlugin("Punish").getDescription().getVersion()));
+
+         if (!Configuration.getConfig().contains("Punishments" + "." + player.getUniqueId() + ".reason")) {
+                System.out.println(player.getDisplayName() + " is not in the punished list");
                 return;
             }
-         Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".reason", null);
-        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".duration", null);
-        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".duration_type", null);
-        Configuration.getConfig().set("Punishments" + "." + event.getPlayer().getUniqueId() + ".releaseDate", null);
+         Configuration.getConfig().set("Punishments" + "." + player.getUniqueId() + ".reason", null);
+        Configuration.getConfig().set("Punishments" + "." +  player.getUniqueId() + ".duration", null);
+        Configuration.getConfig().set("Punishments" + "." +  player.getUniqueId() + ".releaseDate", null);
+
          Configuration.punish.saveConfig();
          System.out.println(event.getPlayer().getDisplayName() + "'s punishment reason is removed from the config.yml");
     }
+
 }

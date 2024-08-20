@@ -8,6 +8,7 @@ public final class Punish extends JavaPlugin {
     @Override
     public void onEnable() {
         System.out.println(Util.getPluginPrefix() + "has been launched.");
+        System.out.println(Util.getPluginPrefix() + "is on version ${project.version}");
         new Configuration(this);
         Bukkit.getPluginManager().registerEvents(new listener(), this);
         getCommand("punish").setExecutor(new PunishCommand());

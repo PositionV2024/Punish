@@ -33,8 +33,7 @@ public class Configuration {
         List<String> PlayerNamePath = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
         List<String> ReasonPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
         List<String> PunishmentTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
-        List<Integer> DurationPath = getConfig().getIntegerList("Punishments" + "." + target.getUniqueId() + ".duration");
-        List<String> durationTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".duration_type");
+        List<String> DurationPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
         List<String> releaseDatePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
         List<String> punishByPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
@@ -61,10 +60,9 @@ public class Configuration {
         PlayerNamePath.add(target.getDisplayName());
         ReasonPath.add(reason);
         PunishmentTypePath.add(punishment_type.toString());
-        DurationPath.add(duration);
+        DurationPath.add(duration + " (" + durationType + ")");
         releaseDatePath.add(cal.getTime().toString());
-        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + " )");
-        durationTypePath.add(durationType.toString());
+        punishByPath.add(Punishedby.getDisplayName() + " (" + Punishedby.getUniqueId() + ")");
 
         getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
         getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
@@ -78,7 +76,6 @@ public class Configuration {
             case Temporary:
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration_type", durationTypePath);
                 getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
                 break;
         }
