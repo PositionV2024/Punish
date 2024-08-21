@@ -1,45 +1,54 @@
 package com.clarence.punish;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
 public class Configuration {
-     public static Punish punish;
+     public static File messagesFile = null;
+     private static YamlConfiguration messagesFileYamlConfiguration = null;
 
-     public static FileConfiguration getConfig() {
-         return Configuration.punish.getConfig();
-     }
+     public static YamlConfiguration getMessagesFileYamlConfiguration() { return  messagesFileYamlConfiguration; }
 
     public Configuration(Punish punish) {
-        Configuration.punish = punish;
+        messagesFile = createFile(punish,"Punishments.yml");
+        messagesFileYamlConfiguration = yamlConfiguration(messagesFile);
+        try {
+            messagesFileYamlConfiguration.save(messagesFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        if (punish == null){
-            System.out.println(Util.getPluginPrefix() + "has failed to hook on to " + punish.getName());
-            return;
+    public File createFile(Punish punish, String name) {
+        File file = new File(punish.getDataFolder(), name);
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+            }
         }
 
-        System.out.println(Util.getPluginPrefix() + "has successfully hook on to " + punish.getName());
-        punish.getConfig().options().copyDefaults();
-        punish.saveDefaultConfig();
+        return file;
+    }
+    public YamlConfiguration yamlConfiguration(File file) {
+         return YamlConfiguration.loadConfiguration(file);
     }
 
     public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player Punishedby) {
+        List<String> PlayerNamePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getDisplayName() + ".name");
+        List<String> ReasonPath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
+        List<String> PunishmentTypePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
+        List<String> DurationPath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
+        List<String> releaseDatePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
+        List<String> punishByPath =messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
-         List<String> MainPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId());
-        List<String> PlayerNamePath = getConfig().getStringList("Punishments" + "." + target.getDisplayName() + ".name");
-        List<String> ReasonPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
-        List<String> PunishmentTypePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
-        List<String> DurationPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
-        List<String> releaseDatePath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
-        List<String> punishByPath = getConfig().getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
-       //if (getConfig().contains("Punishments" + "." + target.getUniqueId() + ".reason")) {
-       //    System.out.println(Util.getPluginPrefix() + "You are already in the punishments list.");
-       //    return;
-       //}
         Calendar cal = Calendar.getInstance();
 
         switch (durationType) {
@@ -54,7 +63,6 @@ public class Configuration {
                 break;
         }
 
-       // MainPath.add(target.getUniqueId().toString());
         PlayerNamePath.add(target.getDisplayName());
         ReasonPath.add(reason);
         PunishmentTypePath.add(punishment_type.toString());
@@ -62,25 +70,26 @@ public class Configuration {
         releaseDatePath.add(cal.getTime().toString());
         punishByPath.add(Punishedby.getDisplayName());
 
-        //getConfig().set("Punishments" + "." + target.getUniqueId(), MainPath);
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
+        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
+        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
 
         switch (punishment_type) {
             case Kick:
             case Permanent:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 break;
             case Temporary:
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
-                getConfig().set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
+                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
+                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
                 break;
         }
-        getConfig().set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
+        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
 
-        punish.saveConfig();
-
-        System.out.println(Util.getPluginPrefix() +"Added " + target.getDisplayName() + " (" + target.getUniqueId() + ") " + "to the config.yml file.");
+        try {
+            messagesFileYamlConfiguration.save(messagesFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

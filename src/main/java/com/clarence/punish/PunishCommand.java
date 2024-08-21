@@ -84,17 +84,17 @@ public class PunishCommand implements CommandExecutor {
             sendMessage(player, Util.Color(Errors.getInvalidArugments()));
             return;
         }
-        String d = ChatColor.GRAY+"Player name: " +ChatColor.DARK_GREEN + Configuration.getConfig().getString("Punishments." + args[1] + ".name") +
-                ChatColor.GRAY + "\nReason for punishments: " +ChatColor.DARK_GREEN+ Configuration.getConfig().getString("Punishments." + args[1] + ".reason") +
-                ChatColor.GRAY + "\nPunishment type: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".punishment_type") +
-                ChatColor.GRAY + "\nDuration: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".duration") +
-                ChatColor.GRAY + "\nRelease date: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".releaseDate") +
-                ChatColor.GRAY + "\nPunished by: " +ChatColor.DARK_GREEN+ Configuration.getConfig().getString("Punishments." + args[1] + ".punishedBy");
+        String userUUID_data = ChatColor.GRAY+"Player name: " +ChatColor.DARK_GREEN + Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".name") +
+                ChatColor.GRAY + "\nReason for punishments: " +ChatColor.DARK_GREEN+ Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".reason") +
+                ChatColor.GRAY + "\nPunishment type: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".punishment_type") +
+                ChatColor.GRAY + "\nDuration: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".duration") +
+                ChatColor.GRAY + "\nRelease date: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".releaseDate") +
+                ChatColor.GRAY + "\nPunished by: " +ChatColor.DARK_GREEN+ Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".punishedBy");
 
         String header = ChatColor.translateAlternateColorCodes('&', "&2----------");
 
         sendMessage(player, header);
-        sendMessage(player, d);
+        sendMessage(player, userUUID_data);
         sendMessage(player, header);
     }
     public void setTargetPunished(Player player, String[] args){

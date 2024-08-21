@@ -16,4 +16,9 @@ public class Errors {
     public static String getNoConsoleSender() { return NO_CONSOLE_SENDER; }
     public static String getNoPermission() { return NO_PERMISSION; }
     private static String getErrorColor() { return errorColor; }
+
+    public static void setNoConsoleSender(String noConsoleSender) { NO_CONSOLE_SENDER = noConsoleSender;}
+    public static void setInvalidTarget(String invalidTarget) { INVALID_TARGET = invalidTarget;}
+    public static void setPunishmentReason(String punishmentReason) { PUNISHMENT_REASON = punishmentReason; }
+    public static void setNoPermission(String permission) { NO_PERMISSION = permission; }
 }
