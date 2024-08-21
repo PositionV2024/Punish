@@ -79,19 +79,23 @@ public class PunishCommand implements CommandExecutor {
         player.sendMessage(message);
     }
     public void getConfigurationList(Player player, String[] args) {
+
         if (args.length == 1) {
             sendMessage(player, Util.Color(Errors.getInvalidArugments()));
             return;
         }
+        String d = ChatColor.GRAY+"Player name: " +ChatColor.DARK_GREEN + Configuration.getConfig().getString("Punishments." + args[1] + ".name") +
+                ChatColor.GRAY + "\nReason for punishments: " +ChatColor.DARK_GREEN+ Configuration.getConfig().getString("Punishments." + args[1] + ".reason") +
+                ChatColor.GRAY + "\nPunishment type: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".punishment_type") +
+                ChatColor.GRAY + "\nDuration: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".duration") +
+                ChatColor.GRAY + "\nRelease date: " +ChatColor.DARK_GREEN+Configuration.getConfig().getString("Punishments." + args[1] + ".releaseDate") +
+                ChatColor.GRAY + "\nPunished by: " +ChatColor.DARK_GREEN+ Configuration.getConfig().getString("Punishments." + args[1] + ".punishedBy");
 
-        sendMessage(player, ChatColor.translateAlternateColorCodes('&', "&2----------"));
-        sendMessage(player, Util.Color("&7Player name: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".name")));
-        sendMessage(player, Util.Color("&7Reason for punishment: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".reason")));
-        sendMessage(player, Util.Color("&7Punishment type: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".punishment_type")));
-        sendMessage(player, Util.Color("&7Duration: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".duration")));
-        sendMessage(player, Util.Color("&7Release date: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".releaseDate")));
-        sendMessage(player, Util.Color("&7Punished by: &2" + Configuration.getConfig().getString("Punishments." + args[1] + ".punishedBy")));
-        sendMessage(player, ChatColor.translateAlternateColorCodes('&', "&2----------"));
+        String header = ChatColor.translateAlternateColorCodes('&', "&2----------");
+
+        sendMessage(player, header);
+        sendMessage(player, d);
+        sendMessage(player, header);
     }
     public void setTargetPunished(Player player, String[] args){
         Player target = Bukkit.getPlayerExact(args[0]);
