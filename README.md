@@ -12,8 +12,8 @@ Free download: https://builtbybit.com/resources/punish.50069
 ## New updates
 <details>
     <summary>v1.5-SNAPSHOT</summary>
-    In this update, I have made a way to lookup punished players UUID that is in the configuration file. I have also change the auto-tab-completion.
-</details>
+    In this update, I have made a way to lookup punished players UUID that is in the configuration file. I have also change the auto-tab-completion. There is also new commands /punish version and /punish lookup <UUID>
+    </details>
 <details>
     <summary>v1.4-SNAPSHOT</summary>
     In this update, I have integated a system where it will ask you to download the latest version of the plugin if you are on an older version. There is also some changes in the information structure in the configuration file. More suggested reason on why a player might get punish.
