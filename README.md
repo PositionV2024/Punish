@@ -47,11 +47,11 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     /punish version
     /punish lookup <player>
 ## Messages.yml
-    `NO_CONSOLE_SENDER: You can't access this command through CONSOLE
+    NO_CONSOLE_SENDER: You can't access this command through CONSOLE
     NO_PERMISSION: You do not have permission to use this command.
     INVALID_TARGET: The targeted player is offline or does not exist.
     PUNISHMENT_REASON: Enter a reason for the punishment.
     NO_RECORD: Can't get record of that player.
 ## Permission
-    punish.use - Basic access to /punish
+    punish.use
 ### Developed by Clarence
