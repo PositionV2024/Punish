@@ -46,7 +46,7 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     /punish <player> <reason>
     /punish version
     /punish lookup <player>
-## Messages.yml
+## Messages.yml (Color code enabled)
     NO_CONSOLE_SENDER: You can't access this command through CONSOLE
     NO_PERMISSION: You do not have permission to use this command.
     INVALID_TARGET: The targeted player is offline or does not exist.
