@@ -11,6 +11,11 @@ Free download: https://builtbybit.com/resources/punish.50069
 
 ## New updates
 <details>
+    <summary>v1.6-SNAPSHOT</summary>
+    In this update, I have removed the config.yml and added a new punishment.yml file to log punished player's related data. I've also implemented a nice UI screen to the lookup <UUID> feature.
+    </details>
+<details>
+<details>
     <summary>v1.5-SNAPSHOT</summary>
     In this update, I have made a way to lookup punished players UUID that is in the configuration file. I have also change the auto-tab-completion. There is also new commands /punish version and /punish lookup <UUID>
     </details>
