@@ -29,7 +29,7 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 </details>
 <details> 
     <summary>v1.2-SNAPSHOT</summary>
-    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID. The configuration file will not allow copies of banned player's UUID 
+    In this update, I have adjusted the size of the punishment GUI. I have also create a configuration file to store in banned player's UUID. The configuration file will not allow copies of banned player's UUID
     https://www.youtube.com/watch?v=gRA8qIQiba8
 </details>
 <details>
@@ -40,10 +40,7 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 
 ## Command usage:
     /punish <player> <reason>
-  
-   You can only punish other players. 
-    You must enter a reason for the punishment that you impose on the targeted player.
+    /punish
 ## Permission
     punish.use
-If you want them to get access to /punish
 ### Developed by Clarence
