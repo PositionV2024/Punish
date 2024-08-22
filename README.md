@@ -11,6 +11,10 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 
 ## New updates
 <details>
+    <summary>v1.7-SNAPSHOT</summary>
+    In this update, there is no need to lookup the player's UUID because you can lookup the player's name. If the player can't be found, there won't be any punishment records for them. There is a messages.yml file. If you want to change certain messages, now you can.
+    </details>
+<details>
     <summary>v1.6-SNAPSHOT</summary>
     In this update, I have removed the config.yml and added a new punishment.yml file to log punished player's related data. I've also implemented a nice UI screen to the lookup <UUID> feature.
     </details>
