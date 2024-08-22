@@ -9,11 +9,12 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Configuration {
-     public static File userUUIDFile, messagesFile = null;
-     private static YamlConfiguration userUUIDYamlConfiguration, messagesConfiguration = null;
+     private static File userUUIDFile, messagesFile, materialFile = null;
+     private static YamlConfiguration userUUIDYamlConfiguration, messagesConfiguration, materialConfiguration = null;
 
      public static YamlConfiguration getUserUUIDYamlConfiguration() { return  userUUIDYamlConfiguration; }
-    public static YamlConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
+     public static YamlConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
+     public static YamlConfiguration getMaterialConfiguration() {return materialConfiguration; }
 
     public Configuration(Punish punish) {
         userUUIDFile = createFile(punish,"Punishments.yml");
@@ -22,16 +23,27 @@ public class Configuration {
         messagesFile = createFile(punish,"Messages.yml");
         messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
 
-        messagesConfiguration.addDefault("NO_CONSOLE_SENDER", Errors.getNoConsoleSender());
-        messagesConfiguration.addDefault("NO_PERMISSION", Errors.getNoPermission());
-        messagesConfiguration.addDefault("INVALID_TARGET", Errors.getInvalidTarget());
-        messagesConfiguration.addDefault("PUNISHMENT_REASON", Errors.getPunishmentReason());
-        messagesConfiguration.addDefault("NO_RECORD", Errors.getNoRecord());
+        materialFile = createFile(punish,"Material.yml");
+        materialConfiguration = YamlConfiguration.loadConfiguration(materialFile);
 
-        messagesConfiguration.options().copyDefaults(true);
+
+        addDefault(messagesConfiguration, "NO_CONSOLE_SENDER", Errors.getNoConsoleSender());
+        addDefault(messagesConfiguration, "NO_PERMISSION", Errors.getNoPermission());
+        addDefault(messagesConfiguration, "INVALID_TARGET", Errors.getInvalidTarget());
+        addDefault(messagesConfiguration, "PUNISHMENT_REASON", Errors.getPunishmentReason());
+        addDefault(messagesConfiguration,"NO_RECORD", Errors.getNoRecord());
+
+        addDefault(materialConfiguration, "defaultInventoryMaterial", InventoryHelper.getDefaultInventoryMaterial().toString());
+        addDefault(materialConfiguration, "reasonToBePunishmentMaterial", InventoryHelper.getReasonToBePunishmentMaterial().toString());
 
         saveConfigurationFile(userUUIDYamlConfiguration, userUUIDFile);
         saveConfigurationFile(messagesConfiguration, messagesFile);
+        saveConfigurationFile(materialConfiguration, materialFile);
+    }
+
+    public void addDefault(YamlConfiguration yamlConfiguration, String path, String name) {
+        yamlConfiguration.addDefault(path, name);
+        yamlConfiguration.options().copyDefaults(true);
     }
 
     public File createFile(Punish punish, String name) {

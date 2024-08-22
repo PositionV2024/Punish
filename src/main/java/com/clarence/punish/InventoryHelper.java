@@ -47,7 +47,7 @@ public class InventoryHelper {
     private final static String itemTitleColor = "" + ChatColor.GREEN + ChatColor.BOLD;
 
     private final static Material defaultInventoryMaterial = Material.YELLOW_STAINED_GLASS_PANE;
-    private final static Material reasonToBePunishment = Material.WRITABLE_BOOK;
+    private final static Material reasonToBePunishmentMaterial = Material.WRITABLE_BOOK;
     private final static Material playerNameItemMaterial = Material.DIAMOND_AXE;
     private final static Material kickItemMaterial = Material.ENCHANTED_BOOK;
     private final static Material temporaryBanMaterial = Material.ENCHANTED_BOOK;
@@ -70,6 +70,7 @@ public class InventoryHelper {
     public static Material getDefaultInventoryMaterial() {
         return defaultInventoryMaterial;
     }
+    public static Material getReasonToBePunishmentMaterial() { return reasonToBePunishmentMaterial; }
 
     public static Material getTypesOfPunishmentMaterial() {
         return typesOfPunishmentMaterial;
@@ -89,10 +90,6 @@ public class InventoryHelper {
 
     public static Material getPlayerNameItemMaterial() {
         return playerNameItemMaterial;
-    }
-
-    public static Material getPunishMaterial() {
-        return reasonToBePunishment;
     }
 
     public static String getItemTitleColor() {
@@ -155,13 +152,16 @@ public class InventoryHelper {
     public static int[] getDecorationInventorySlot() {return DecorationInventorySlot; }
 
     public InventoryHelper(Player player, Player targetByUUID) {
-        Inventory inventory = createDefaultInventory(getInventoryTitle(), getDefaultInventoryMaterial());
+        Inventory inventory = createDefaultInventory(getInventoryTitle(), getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("defaultInventoryMaterial")));
 
         //Essentials
         createBaseItemStack(inventory, targetByUUID);
         playerOpenInventory(player, inventory);
     }
 
+    public static Material getMaterialFromConfiguration(String name) {
+        return Material.matchMaterial(name);
+    }
     public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
         Inventory inventory = Bukkit.createInventory(null, 45, invTitle);
         for (int i : getDefaultDecorationInventorySlot()) {
@@ -196,7 +196,7 @@ public class InventoryHelper {
     }
     public static void clearItemIndex(Inventory inventory, int index) { inventory.clear(index); }
     public static void createBaseItemStack(Inventory inventory, Player targetByUUID) {
-        ItemStack reasonItemStack = createNewItemStack(getPunishMaterial(), getItemTitleColor() + "Reason for punishment", getItemLoreColor() + Util.getStringBuilderMessage() + ".");
+        ItemStack reasonItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("reasonToBePunishmentMaterial")), getItemTitleColor() + "Reason for punishment", getItemLoreColor() + Util.getStringBuilderMessage() + ".");
         ItemStack playerNameItemStack = createNewItemStack(getPlayerNameItemMaterial(), getItemTitleColor() + "Target's name", getItemLoreColor() + targetByUUID.getDisplayName());
         ItemStack playerUUIDItemStack = createNewItemStack(getTypesOfPunishmentMaterial(), getItemTitleColor() + "Player's UUID", getItemLoreColor() + targetByUUID.getUniqueId());
 
