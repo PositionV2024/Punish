@@ -40,7 +40,8 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 
 ## Command usage:
     /punish <player> <reason>
-    /punish
+    /punish version
+    /punish lookup <UUID>
 ## Permission
-    punish.use
+    punish.use - Basic access to /punish
 ### Developed by Clarence
