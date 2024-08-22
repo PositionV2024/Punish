@@ -3,6 +3,7 @@ package com.clarence.punish;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -160,12 +161,23 @@ public class InventoryHelper {
         createBaseItemStack(inventory, targetByUUID);
         playerOpenInventory(player, inventory);
     }
+
     public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
         Inventory inventory = Bukkit.createInventory(null, 45, invTitle);
         for (int i : getDefaultDecorationInventorySlot()) {
             ItemStack itemStack = createNewItemStack(inventoryFrameMaterial, "", "");
             setInventoryItem(inventory, i, itemStack);
         }
+        return inventory;
+    }
+    public static Inventory createInventory(String invTitle, Material inventoryFrameMaterial) {
+        Inventory inventory = Bukkit.createInventory(null, 9, invTitle);
+
+        for (int i : new int[]{0, 1,2, 6,7,8}) {
+            ItemStack itemStack = createNewItemStack(Material.GREEN_STAINED_GLASS, "");
+            setInventoryItem(inventory, i, itemStack);
+        }
+
         return inventory;
     }
     public static ItemStack createNewItemStack(Material material, String itemDisplayName, String... itemLore) {
@@ -236,5 +248,75 @@ public class InventoryHelper {
         InventoryHelper.setInventoryItem(inventory, 14,DAY_1temStack);
         InventoryHelper.setInventoryItem(inventory, 23,DAY_2temStack);
         InventoryHelper.setInventoryItem(inventory, 32,DAY_3temStack);
+    }
+    public static void lookUp(Player player, String[] args) {
+
+        OfflinePlayer getOfflinePlayerByUUID = Bukkit.getServer().getOfflinePlayer(args[1]);
+
+        if (!getOfflinePlayerByUUID.hasPlayedBefore()) {
+            player.sendMessage(Util.Color(Configuration.getMessagesConfiguration().getString("NO_RECORD")));
+            return;
+        }
+        player.sendMessage(Util.Color("&7Success."));
+
+        String playerName = Configuration.getUserUUIDYamlConfiguration().getString("Punishments."+getOfflinePlayerByUUID.getUniqueId()+".name");
+        String punishmentReason = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".reason");
+        String punishment_type = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".punishment_type");
+        String duration = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".duration");
+        String punishedBy = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".punishedBy");
+        String releaseDate = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".releaseDate");
+
+        Inventory inventory = InventoryHelper.createInventory("Punishment lookup", Material.WHITE_STAINED_GLASS_PANE);
+
+        ItemStack playerNameItemStack, punishReasonItemStack, punishmentTypeItemStack, durationItemStack, punishedByItemStack, releaseDateItemStack;
+
+        if (playerName == null) {
+            playerNameItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Player name]");
+        }
+        else {
+            playerNameItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Player name]", playerName);
+        }
+        InventoryHelper.setInventoryItem(inventory, 1, playerNameItemStack);
+
+        if (punishmentReason == null) {
+            punishReasonItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punishment reason]");
+        }
+        else {
+            punishReasonItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punishment reason]", punishmentReason);
+        }
+        InventoryHelper.setInventoryItem(inventory, 2, punishReasonItemStack);
+
+        if (punishment_type == null) {
+            punishmentTypeItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punishment type]");
+        }
+        else { punishmentTypeItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punishment type]", punishment_type);
+
+        }
+        InventoryHelper.setInventoryItem(inventory, 3, punishmentTypeItemStack);
+
+        if (duration == null) {
+            durationItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Duration]");
+        }
+        else {
+            durationItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Duration]", duration);
+        }
+        InventoryHelper.setInventoryItem(inventory, 4, durationItemStack);
+        if (punishedBy == null) {
+            punishedByItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punished by]");
+        }
+        else {
+            punishedByItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Punished by]", punishedBy);
+        }
+        setInventoryItem(inventory, 5, punishedByItemStack);
+
+        if (releaseDate == null) {
+            releaseDateItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Release date]");
+        }
+        else {
+            releaseDateItemStack = InventoryHelper.createNewItemStack(Material.GOLD_BLOCK, InventoryHelper.getItemTitleColor() + "[Release date]", releaseDate);
+        }
+        setInventoryItem(inventory, 6, releaseDateItemStack);
+
+        playerOpenInventory(player, inventory);
     }
 }

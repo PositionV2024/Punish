@@ -12,10 +12,11 @@ public class listener implements Listener {
     @EventHandler
     public void onInventoryClickedEvent(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        //Player target = null;
-        //for (UUID uuid : PunishCommand.uuid) {
-        // target = Bukkit.getServer().getPlayer(uuid);
-        // }
+        if (event.getView().getTitle().equals("Punishment lookup")) {
+            event.setCancelled(true);
+            return;
+        }
+
         UUID uuid = (UUID) unique_identifier.getUUIDHashMap().get(player.getUniqueId());
 
         if (uuid == null) {

@@ -4,21 +4,17 @@ public class Errors {
     private final static String errorColor = "&4";
 
     private static String NO_CONSOLE_SENDER = "You can't access this command through CONSOLE";
-    private static String NO_PERMISSION = getErrorColor() + "You do not have permission to use this command.";
+    private static String NO_PERMISSION = "You do not have permission to use this command.";
     private static String INVALID_ARUGMENTS = "Command usage: /punish <player> <reason>\nCommand usage: /punish version\nCommand " +
             "usage: /punish lookup <uuid>";
-    private static String INVALID_TARGET = getErrorColor() + "The targeted player is offline or does not exist.";
-    private static String PUNISHMENT_REASON = getErrorColor() + "Enter a reason for the punishment.";
+    private static String INVALID_TARGET = "The targeted player is offline or does not exist.";
+    private static String PUNISHMENT_REASON = "Enter a reason for the punishment.";
+    private static String NO_RECORD ="Can't get record of that player.";
 
     public static String getPunishmentReason() { return PUNISHMENT_REASON; }
     public static String getInvalidTarget() {return INVALID_TARGET; }
     public static String getInvalidArugments() { return INVALID_ARUGMENTS; }
     public static String getNoConsoleSender() { return NO_CONSOLE_SENDER; }
     public static String getNoPermission() { return NO_PERMISSION; }
-    private static String getErrorColor() { return errorColor; }
-
-    public static void setNoConsoleSender(String noConsoleSender) { NO_CONSOLE_SENDER = noConsoleSender;}
-    public static void setInvalidTarget(String invalidTarget) { INVALID_TARGET = invalidTarget;}
-    public static void setPunishmentReason(String punishmentReason) { PUNISHMENT_REASON = punishmentReason; }
-    public static void setNoPermission(String permission) { NO_PERMISSION = permission; }
+    public static String getNoRecord() { return NO_RECORD; }
 }

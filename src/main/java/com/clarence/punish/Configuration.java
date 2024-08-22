@@ -9,19 +9,29 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Configuration {
-     public static File messagesFile = null;
-     private static YamlConfiguration messagesFileYamlConfiguration = null;
+     public static File userUUIDFile, messagesFile = null;
+     private static YamlConfiguration userUUIDYamlConfiguration, messagesConfiguration = null;
 
-     public static YamlConfiguration getMessagesFileYamlConfiguration() { return  messagesFileYamlConfiguration; }
+     public static YamlConfiguration getUserUUIDYamlConfiguration() { return  userUUIDYamlConfiguration; }
+    public static YamlConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
 
     public Configuration(Punish punish) {
-        messagesFile = createFile(punish,"Punishments.yml");
-        messagesFileYamlConfiguration = yamlConfiguration(messagesFile);
-        try {
-            messagesFileYamlConfiguration.save(messagesFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        userUUIDFile = createFile(punish,"Punishments.yml");
+        userUUIDYamlConfiguration = YamlConfiguration.loadConfiguration(userUUIDFile);
+
+        messagesFile = createFile(punish,"Messages.yml");
+        messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
+
+        messagesConfiguration.addDefault("NO_CONSOLE_SENDER", Errors.getNoConsoleSender());
+        messagesConfiguration.addDefault("NO_PERMISSION", Errors.getNoPermission());
+        messagesConfiguration.addDefault("INVALID_TARGET", Errors.getInvalidTarget());
+        messagesConfiguration.addDefault("PUNISHMENT_REASON", Errors.getPunishmentReason());
+        messagesConfiguration.addDefault("NO_RECORD", Errors.getNoRecord());
+
+        messagesConfiguration.options().copyDefaults(true);
+
+        saveConfigurationFile(userUUIDYamlConfiguration, userUUIDFile);
+        saveConfigurationFile(messagesConfiguration, messagesFile);
     }
 
     public File createFile(Punish punish, String name) {
@@ -36,17 +46,22 @@ public class Configuration {
 
         return file;
     }
-    public YamlConfiguration yamlConfiguration(File file) {
-         return YamlConfiguration.loadConfiguration(file);
+
+    public void saveConfigurationFile(YamlConfiguration yamlConfiguration, File fileName) {
+        try {
+            yamlConfiguration.save(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player Punishedby) {
-        List<String> PlayerNamePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getDisplayName() + ".name");
-        List<String> ReasonPath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
-        List<String> PunishmentTypePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
-        List<String> DurationPath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
-        List<String> releaseDatePath = messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
-        List<String> punishByPath =messagesFileYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
+        List<String> PlayerNamePath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getDisplayName() + ".name");
+        List<String> ReasonPath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
+        List<String> PunishmentTypePath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishment_type");
+        List<String> DurationPath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
+        List<String> releaseDatePath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
+        List<String> punishByPath =userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
 
 
         Calendar cal = Calendar.getInstance();
@@ -70,24 +85,24 @@ public class Configuration {
         releaseDatePath.add(cal.getTime().toString());
         punishByPath.add(Punishedby.getDisplayName());
 
-        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
-        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
+        userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".name", PlayerNamePath);
+        userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".reason", ReasonPath);
 
         switch (punishment_type) {
             case Kick:
             case Permanent:
-                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
                 break;
             case Temporary:
-                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
-                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
-                messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
+                userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishment_type", PunishmentTypePath);
+                userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".duration", DurationPath);
+                userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".releaseDate", releaseDatePath);
                 break;
         }
-        messagesFileYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
+        userUUIDYamlConfiguration.set("Punishments" + "." + target.getUniqueId() + ".punishedBy", punishByPath);
 
         try {
-            messagesFileYamlConfiguration.save(messagesFile);
+            userUUIDYamlConfiguration.save(userUUIDFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

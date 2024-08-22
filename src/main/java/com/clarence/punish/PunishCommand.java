@@ -16,13 +16,13 @@ public class PunishCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            System.out.println(Errors.getNoConsoleSender());
+            System.out.println(Configuration.getMessagesConfiguration().getString("NO_CONSOLE_SENDER"));
             return true;
         }
         Player player = (Player) sender;
 
         if (!(player.hasPermission(Permission.Usage.getName()))) {
-            sendMessage(player, Util.Color(Errors.getNoPermission()));
+            sendMessage(player, Util.Color(Configuration.getMessagesConfiguration().getString("NO_PERMISSION")));
             return true;
         }
 
@@ -39,7 +39,11 @@ public class PunishCommand implements CommandExecutor {
                         "for more improvements: &2" + Punish.getUpdateChecker().getUpdateUrl()));
                 break;
             case "lookup":
-                getConfigurationList(player, args);
+                if (args.length == 1) {
+                    sendMessage(player, Util.Color(Errors.getInvalidArugments()));
+                    return true;
+                }
+                InventoryHelper.lookUp(player, args);
                 break;
             default:
                 setTargetPunished(player, args);
@@ -49,7 +53,7 @@ public class PunishCommand implements CommandExecutor {
     }
     void handleInventory(Player player, Player target, String args[]) {
         if (args.length == 1) {
-            player.sendMessage(Util.Color(Errors.getPunishmentReason()));
+            player.sendMessage(Util.Color(Configuration.getMessagesConfiguration().getString("PUNISHMENT_REASON")));
             return;
         }
        // if (uuid.contains(target.getUniqueId())) {
@@ -72,36 +76,17 @@ public class PunishCommand implements CommandExecutor {
 
         StringBuilder stringBuilder = Util.stringBuilder(args, 1);
 
-        InventoryHelper inventoryHelper = new InventoryHelper(player, target);
+        new InventoryHelper(player, target);
     }
 
     public void sendMessage(Player player, String message) {
         player.sendMessage(message);
     }
-    public void getConfigurationList(Player player, String[] args) {
-
-        if (args.length == 1) {
-            sendMessage(player, Util.Color(Errors.getInvalidArugments()));
-            return;
-        }
-        String userUUID_data = ChatColor.GRAY+"Player name: " +ChatColor.DARK_GREEN + Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".name") +
-                ChatColor.GRAY + "\nReason for punishments: " +ChatColor.DARK_GREEN+ Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".reason") +
-                ChatColor.GRAY + "\nPunishment type: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".punishment_type") +
-                ChatColor.GRAY + "\nDuration: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".duration") +
-                ChatColor.GRAY + "\nRelease date: " +ChatColor.DARK_GREEN+Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".releaseDate") +
-                ChatColor.GRAY + "\nPunished by: " +ChatColor.DARK_GREEN+ Configuration.getMessagesFileYamlConfiguration().getString("Punishments." + args[1] + ".punishedBy");
-
-        String header = ChatColor.translateAlternateColorCodes('&', "&2----------");
-
-        sendMessage(player, header);
-        sendMessage(player, userUUID_data);
-        sendMessage(player, header);
-    }
     public void setTargetPunished(Player player, String[] args){
         Player target = Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            player.sendMessage(Util.Color(Errors.getInvalidTarget()));
+            player.sendMessage(Util.Color(Configuration.getMessagesConfiguration().getString("INVALID_TARGET")));
             return;
         }
         handleInventory(player, target, args);
