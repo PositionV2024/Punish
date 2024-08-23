@@ -106,9 +106,10 @@ public class Configuration {
             System.out.println(Util.getPluginPrefix() + "could not save " + fileName + ".");
         }
     }
-    public static void reloadConfigurationFiles() {
+    public static void reloadConfigurationFiles(Player player) {
         messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
         materialConfiguration = YamlConfiguration.loadConfiguration(materialFile);
+        player.sendMessage(Util.Color("&7Successfully reloaded all files."));
     }
     public static void reloadMessageConfigurationFile(Player player) {
         messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
@@ -125,7 +126,6 @@ public class Configuration {
         List<String> DurationPath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".duration");
         List<String> releaseDatePath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".releaseDate");
         List<String> punishByPath =userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".punishedBy");
-
 
         Calendar cal = Calendar.getInstance();
 

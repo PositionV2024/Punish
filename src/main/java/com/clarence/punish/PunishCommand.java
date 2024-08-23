@@ -63,6 +63,9 @@ public class PunishCommand implements CommandExecutor {
                     case "material.yml":
                         Configuration.reloadMaterialConfigurationFile(player);
                         break;
+                    default:
+                        Configuration.reloadConfigurationFiles(player);
+                        break;
                 }
                 break;
             default:
