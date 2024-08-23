@@ -6,8 +6,6 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 ![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png "Plugin picture")
 #
 ![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif "Gif")
-#
-[![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "YouTube video")
 
 ## New updates
 <details>
