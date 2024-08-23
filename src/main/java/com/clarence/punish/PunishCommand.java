@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class PunishCommand implements CommandExecutor {
@@ -44,6 +46,24 @@ public class PunishCommand implements CommandExecutor {
                     return true;
                 }
                 InventoryHelper.lookUp(player, args);
+                break;
+            case "reload":
+                if (args.length == 1) {
+                    List<String> fileTypes = Arrays.asList("material.yml", "messages.yml");
+                    for (String file : fileTypes) {
+                        player.sendMessage(Util.Color(file));
+                    }
+                    player.sendMessage(Util.Color("&7Please specify a file to reload."));
+                    return true;
+                }
+                switch (args[1].toLowerCase()) {
+                    case "messages.yml":
+                        Configuration.reloadMessageConfigurationFile(player);
+                        break;
+                    case "material.yml":
+                        Configuration.reloadMaterialConfigurationFile(player);
+                        break;
+                }
                 break;
             default:
                 setTargetPunished(player, args);

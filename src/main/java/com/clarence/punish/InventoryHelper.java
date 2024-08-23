@@ -170,6 +170,7 @@ public class InventoryHelper {
     }
     public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
         Inventory inventory = Bukkit.createInventory(null, 45, invTitle);
+
         for (int i : getDefaultDecorationInventorySlot()) {
             ItemStack itemStack = createNewItemStack(inventoryFrameMaterial, "", "");
             setInventoryItem(inventory, i, itemStack);
@@ -202,14 +203,21 @@ public class InventoryHelper {
     }
     public static void clearItemIndex(Inventory inventory, int index) { inventory.clear(index); }
     public static void createBaseItemStack(Inventory inventory, Player targetByUUID) {
+        ItemStack reasonToBePunishItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("reasonToBePunishmentMaterial")), getItemTitleColor() +"[PUNISHMENT REASON]", Util.getStringBuilderMessage());
+        ItemStack playerNameItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("playerNameItemMaterial")), getItemTitleColor() + "[PLAYER NAME]", targetByUUID.getName());
+        ItemStack playerUUIDItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("getPlayerUUIDMaterial")), getItemTitleColor() +"[PLAYER UUID]", targetByUUID.getUniqueId().toString());
+        ItemStack typesPunishmentItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("typesOfPunishmentMaterial")), getItemTitleColor() + "[Types of punishment]");
+        ItemStack getKickItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("getKickItemMaterial")), getItemTitleColor() + getKickTitle());
+        ItemStack getTemporaryBanItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("getTemporaryBanMaterial")), getItemTitleColor() + getTemporaryBanTitle());
+        ItemStack getBanItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("getBanMaterial")), getItemTitleColor() + getBanTitle());
 
-        ItemStack item = null;
-        for (int i = 0; i < Configuration.getMaterials().size(); i++) {
-            item = createNewItemStack(getMaterialFromConfiguration(Configuration.getConfigurationMaterials().get(i)), "Configuration");
-        }
-        for (int i = 0; i < Configuration.getInventorySlot().length; i++) {
-            setInventoryItem(inventory, Configuration.getInventorySlot()[i], item);
-        }
+        setInventoryItem(inventory, 19, reasonToBePunishItemStack);
+        setInventoryItem(inventory, 25, playerNameItemStack);
+        setInventoryItem(inventory, 34, playerUUIDItemStack);
+        setInventoryItem(inventory, 13, typesPunishmentItemStack);
+        setInventoryItem(inventory, 21, getKickItemStack);
+        setInventoryItem(inventory, 22, getTemporaryBanItemStack);
+        setInventoryItem(inventory, 23, getBanItemStack);
     }
     public static void changeInventoryItem(Inventory inventory, Material inventoryFrameMaterial) {
         clearItemIndex(inventory, 13);

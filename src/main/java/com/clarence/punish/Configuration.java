@@ -1,5 +1,6 @@
 package com.clarence.punish;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -11,18 +12,14 @@ import java.util.List;
 
 public class Configuration {
      private static File userUUIDFile, messagesFile, materialFile = null;
-     private static YamlConfiguration userUUIDYamlConfiguration, messagesConfiguration, materialConfiguration = null;
-     private static List<String> materials, configurationMaterials = null;
-     private static int[] inventorySlot = new int[]{
-             13, 19, 25, 21, 22, 23, 34
-     };
+     private static FileConfiguration userUUIDYamlConfiguration, messagesConfiguration, materialConfiguration = null;
+     public static File getUserUUIDFile() {return userUUIDFile;}
+     public static File getMessagesFile() {return messagesFile;}
+     public static File getMaterialFile() {return materialFile;}
 
-     public static List<String> getMaterials() {return  materials; }
-    public static List<String> getConfigurationMaterials() {return  configurationMaterials; }
-    public static int[] getInventorySlot() { return inventorySlot; }
-     public static YamlConfiguration getUserUUIDYamlConfiguration() { return  userUUIDYamlConfiguration; }
-     public static YamlConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
-     public static YamlConfiguration getMaterialConfiguration() {return materialConfiguration; }
+     public static FileConfiguration getUserUUIDYamlConfiguration() { return userUUIDYamlConfiguration; }
+     public static FileConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
+     public static FileConfiguration getMaterialConfiguration() {return materialConfiguration; }
 
     public Configuration(Punish punish) {
         userUUIDFile = createFile(punish,"Punishments.yml");
@@ -48,7 +45,7 @@ public class Configuration {
                 Errors.getNoRecord()
         );
 
-        materials = Arrays.asList(
+        List<String> materials = Arrays.asList(
                 "defaultInventoryMaterial",
                 "reasonToBePunishmentMaterial",
                 "playerNameItemMaterial",
@@ -59,7 +56,7 @@ public class Configuration {
                 "getBanMaterial"
         );
 
-        configurationMaterials = Arrays.asList(
+        List<String> configurationMaterials = Arrays.asList(
                 InventoryHelper.getDefaultInventoryMaterial().toString(),
                 InventoryHelper.getReasonToBePunishmentMaterial().toString(),
                 InventoryHelper.getPlayerNameItemMaterial().toString(),
@@ -69,6 +66,7 @@ public class Configuration {
                 InventoryHelper.getTemporaryBanMaterial().toString(),
                 InventoryHelper.getBanMaterial().toString()
         );
+
 
         for (int i = 0; i < configurationMessages.size(); i++) {
             addDefault(messagesConfiguration, configurationMessages.get(i), getErrorMessages.get(i));
@@ -83,7 +81,7 @@ public class Configuration {
         saveConfigurationFile(materialConfiguration, materialFile);
     }
 
-    public void addDefault(YamlConfiguration yamlConfiguration, String path, String name) {
+    public void addDefault(FileConfiguration yamlConfiguration, String path, String name) {
         yamlConfiguration.addDefault(path, name);
         yamlConfiguration.options().copyDefaults(true);
     }
@@ -97,11 +95,10 @@ public class Configuration {
                 System.out.println(Util.getPluginPrefix() + "Could not create " + name + " file.");
             }
         }
-
         return file;
     }
 
-    public void saveConfigurationFile(YamlConfiguration yamlConfiguration, File fileName) {
+    public static void saveConfigurationFile(FileConfiguration yamlConfiguration, File fileName) {
         try {
             yamlConfiguration.save(fileName);
         } catch (IOException e) {
@@ -109,7 +106,18 @@ public class Configuration {
             System.out.println(Util.getPluginPrefix() + "could not save " + fileName + ".");
         }
     }
-
+    public static void reloadConfigurationFiles() {
+        messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
+        materialConfiguration = YamlConfiguration.loadConfiguration(materialFile);
+    }
+    public static void reloadMessageConfigurationFile(Player player) {
+        messagesConfiguration = YamlConfiguration.loadConfiguration(messagesFile);
+        player.sendMessage(Util.Color("&7Successfully reloaded " + messagesFile.getName()));
+    }
+    public static void reloadMaterialConfigurationFile(Player player) {
+        materialConfiguration = YamlConfiguration.loadConfiguration(materialFile);
+        player.sendMessage(Util.Color("&7Successfully reloaded " + materialFile.getName()));
+    }
     public static void addPlayerUUID(Player target, String reason, BanType punishment_type, int duration, BanDuration durationType, Player Punishedby) {
         List<String> PlayerNamePath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getDisplayName() + ".name");
         List<String> ReasonPath = userUUIDYamlConfiguration.getStringList("Punishments" + "." + target.getUniqueId() + ".reason");
