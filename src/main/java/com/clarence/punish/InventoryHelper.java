@@ -261,7 +261,6 @@ public class InventoryHelper {
             player.sendMessage(Util.Color(Configuration.getMessagesConfiguration().getString("NO_RECORD")));
             return;
         }
-        player.sendMessage(Util.Color("&7Success."));
 
         String playerName = Configuration.getUserUUIDYamlConfiguration().getString("Punishments."+getOfflinePlayerByUUID.getUniqueId()+".name");
         String punishmentReason = Configuration.getUserUUIDYamlConfiguration().getString("Punishments." + getOfflinePlayerByUUID.getUniqueId() + ".reason");
