@@ -52,7 +52,8 @@ public class InventoryHelper {
     private final static Material kickItemMaterial = Material.ENCHANTED_BOOK;
     private final static Material temporaryBanMaterial = Material.ENCHANTED_BOOK;
     private final static Material banMaterial = Material.ENCHANTED_BOOK;
-    private final static Material typesOfPunishmentMaterial = Material.BOOK;
+    private final static Material playerUUIDMaterial = Material.BOOK;
+    private final static Material typesOfPunishmentsMaterial = Material.BOOK;
     private final static Material tempBanDecorationMaterial = Material.RED_STAINED_GLASS_PANE;
 
     private final static Material Minutes5Material = Material.ENCHANTED_BOOK;
@@ -72,10 +73,10 @@ public class InventoryHelper {
     }
     public static Material getReasonToBePunishmentMaterial() { return reasonToBePunishmentMaterial; }
 
-    public static Material getTypesOfPunishmentMaterial() {
-        return typesOfPunishmentMaterial;
+    public static Material getPlayerUUIDMaterial() {
+        return playerUUIDMaterial;
     }
-
+    public static Material getTypesOfPunishmentsMaterial() { return typesOfPunishmentsMaterial; }
     public static Material getBanMaterial() {
         return banMaterial;
     }
@@ -160,6 +161,11 @@ public class InventoryHelper {
     }
 
     public static Material getMaterialFromConfiguration(String name) {
+        try {
+            Material.matchMaterial(name);
+        } catch (IllegalArgumentException e) {
+            e.getStackTrace();
+        }
         return Material.matchMaterial(name);
     }
     public static Inventory createDefaultInventory(String invTitle, Material inventoryFrameMaterial) {
@@ -196,24 +202,14 @@ public class InventoryHelper {
     }
     public static void clearItemIndex(Inventory inventory, int index) { inventory.clear(index); }
     public static void createBaseItemStack(Inventory inventory, Player targetByUUID) {
-        ItemStack reasonItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("reasonToBePunishmentMaterial")), getItemTitleColor() + "Reason for punishment", getItemLoreColor() + Util.getStringBuilderMessage() + ".");
-        ItemStack playerNameItemStack = createNewItemStack(getPlayerNameItemMaterial(), getItemTitleColor() + "Target's name", getItemLoreColor() + targetByUUID.getDisplayName());
-        ItemStack playerUUIDItemStack = createNewItemStack(getTypesOfPunishmentMaterial(), getItemTitleColor() + "Player's UUID", getItemLoreColor() + targetByUUID.getUniqueId());
 
-        ItemStack typeOfPunishmentsItemStack = createNewItemStack(getTypesOfPunishmentMaterial(), getItemTitleColor() + "Types of punishments", "");
-
-        //Types of punishments
-        ItemStack kickItemStack = createNewItemStack(getKickItemMaterial(), getItemTitleColor() + getKickTitle(), getItemLoreColor() + "Good for players", getItemLoreColor() + "breaking small rules.");
-        ItemStack temporaryBanItemStack = createNewItemStack(getTemporaryBanMaterial(), getItemTitleColor() + getTemporaryBanTitle(), getItemLoreColor() + "Good for players", getItemLoreColor() + "that continue bad behaviour.");
-        ItemStack banItemStack = createNewItemStack(getBanMaterial(), getItemTitleColor() + getBanTitle(), getItemLoreColor() + "Good for players", getItemLoreColor() + "that are always putting on", getItemLoreColor() + "a continuous cycle of bad behaviour.");
-
-        setInventoryItem(inventory, 13, typeOfPunishmentsItemStack);
-        setInventoryItem(inventory, 19, reasonItemStack);
-        setInventoryItem(inventory, 25, playerNameItemStack);
-        setInventoryItem(inventory, 21, kickItemStack);
-        setInventoryItem(inventory, 22, temporaryBanItemStack);
-        setInventoryItem(inventory, 23, banItemStack);
-        setInventoryItem(inventory, 34, playerUUIDItemStack);
+        ItemStack item = null;
+        for (int i = 0; i < Configuration.getMaterials().size(); i++) {
+            item = createNewItemStack(getMaterialFromConfiguration(Configuration.getConfigurationMaterials().get(i)), "Configuration");
+        }
+        for (int i = 0; i < Configuration.getInventorySlot().length; i++) {
+            setInventoryItem(inventory, Configuration.getInventorySlot()[i], item);
+        }
     }
     public static void changeInventoryItem(Inventory inventory, Material inventoryFrameMaterial) {
         clearItemIndex(inventory, 13);

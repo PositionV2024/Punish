@@ -5,13 +5,21 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class Configuration {
      private static File userUUIDFile, messagesFile, materialFile = null;
      private static YamlConfiguration userUUIDYamlConfiguration, messagesConfiguration, materialConfiguration = null;
+     private static List<String> materials, configurationMaterials = null;
+     private static int[] inventorySlot = new int[]{
+             13, 19, 25, 21, 22, 23, 34
+     };
 
+     public static List<String> getMaterials() {return  materials; }
+    public static List<String> getConfigurationMaterials() {return  configurationMaterials; }
+    public static int[] getInventorySlot() { return inventorySlot; }
      public static YamlConfiguration getUserUUIDYamlConfiguration() { return  userUUIDYamlConfiguration; }
      public static YamlConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
      public static YamlConfiguration getMaterialConfiguration() {return materialConfiguration; }
@@ -26,15 +34,49 @@ public class Configuration {
         materialFile = createFile(punish,"Material.yml");
         materialConfiguration = YamlConfiguration.loadConfiguration(materialFile);
 
+        List<String> configurationMessages = Arrays.asList(
+                "NO_CONSOLE_SENDER",
+                "NO_PERMISSION",
+                "INVALID_TARGET",
+                "PUNISHMENT_REASON",
+                "NO_RECORD"
+        );
+        List<String> getErrorMessages = Arrays.asList(
+                Errors.getNoConsoleSender(), Errors.getNoPermission(),
+                Errors.getInvalidTarget(),
+                Errors.getPunishmentReason(),
+                Errors.getNoRecord()
+        );
 
-        addDefault(messagesConfiguration, "NO_CONSOLE_SENDER", Errors.getNoConsoleSender());
-        addDefault(messagesConfiguration, "NO_PERMISSION", Errors.getNoPermission());
-        addDefault(messagesConfiguration, "INVALID_TARGET", Errors.getInvalidTarget());
-        addDefault(messagesConfiguration, "PUNISHMENT_REASON", Errors.getPunishmentReason());
-        addDefault(messagesConfiguration,"NO_RECORD", Errors.getNoRecord());
+        materials = Arrays.asList(
+                "defaultInventoryMaterial",
+                "reasonToBePunishmentMaterial",
+                "playerNameItemMaterial",
+                "getPlayerUUIDMaterial",
+                "typesOfPunishmentMaterial",
+                "getKickItemMaterial",
+                "getTemporaryBanMaterial",
+                "getBanMaterial"
+        );
 
-        addDefault(materialConfiguration, "defaultInventoryMaterial", InventoryHelper.getDefaultInventoryMaterial().toString());
-        addDefault(materialConfiguration, "reasonToBePunishmentMaterial", InventoryHelper.getReasonToBePunishmentMaterial().toString());
+        configurationMaterials = Arrays.asList(
+                InventoryHelper.getDefaultInventoryMaterial().toString(),
+                InventoryHelper.getReasonToBePunishmentMaterial().toString(),
+                InventoryHelper.getPlayerNameItemMaterial().toString(),
+                InventoryHelper.getPlayerUUIDMaterial().toString(),
+                InventoryHelper.getTypesOfPunishmentsMaterial().toString(),
+                InventoryHelper.getKickItemMaterial().toString(),
+                InventoryHelper.getTemporaryBanMaterial().toString(),
+                InventoryHelper.getBanMaterial().toString()
+        );
+
+        for (int i = 0; i < configurationMessages.size(); i++) {
+            addDefault(messagesConfiguration, configurationMessages.get(i), getErrorMessages.get(i));
+        }
+
+        for (int i = 0; i < materials.size(); i++) {
+            addDefault(materialConfiguration, materials.get(i), configurationMaterials.get(i));
+        }
 
         saveConfigurationFile(userUUIDYamlConfiguration, userUUIDFile);
         saveConfigurationFile(messagesConfiguration, messagesFile);
@@ -45,7 +87,6 @@ public class Configuration {
         yamlConfiguration.addDefault(path, name);
         yamlConfiguration.options().copyDefaults(true);
     }
-
     public File createFile(Punish punish, String name) {
         File file = new File(punish.getDataFolder(), name);
 
@@ -53,6 +94,7 @@ public class Configuration {
             try {
                 file.createNewFile();
             } catch (IOException e) {
+                System.out.println(Util.getPluginPrefix() + "Could not create " + name + " file.");
             }
         }
 
@@ -64,6 +106,7 @@ public class Configuration {
             yamlConfiguration.save(fileName);
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println(Util.getPluginPrefix() + "could not save " + fileName + ".");
         }
     }
 
