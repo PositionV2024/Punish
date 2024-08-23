@@ -11,6 +11,10 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 
 ## New updates
 <details>
+    <summary>v1.8-SNAPSHOT</summary>
+    https://www.youtube.com/watch?v=FOI09pppTek&t=2s
+    </details>
+<details>
     <summary>v1.7-SNAPSHOT</summary>
     In this update, there is no need to lookup the player's UUID because you can lookup the player's name. If the player can't be found, there won't be any punishment records for them. There is a messages.yml file. If you want to change certain messages, now you can.
     </details>
@@ -46,7 +50,16 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     /punish <player> <reason>
     /punish version
     /punish lookup <player>
-## Messages.yml (Color code enabled)
+## Material.yml
+    defaultInventoryMaterial: YELLOW_STAINED_GLASS_PANE
+    reasonToBePunishmentMaterial: WRITABLE_BOOK
+    playerNameItemMaterial: DIAMOND_AXE
+    getPlayerUUIDMaterial: BOOK
+    typesOfPunishmentMaterial: BOOK
+    getKickItemMaterial: ENCHANTED_BOOK
+    getTemporaryBanMaterial: ENCHANTED_BOOK
+    getBanMaterial: ENCHANTED_BOOK
+## Messages.yml
     NO_CONSOLE_SENDER: You can't access this command through CONSOLE
     NO_PERMISSION: You do not have permission to use this command.
     INVALID_TARGET: The targeted player is offline or does not exist.
