@@ -66,6 +66,7 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     PUNISHMENT_REASON: Enter a reason for the punishment.
     NO_RECORD: Can't get record of that player.
 </details>
+
 ## Permission
     punish.use
 ### Developed by Clarence
