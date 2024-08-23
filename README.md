@@ -43,7 +43,9 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
     https://youtu.be/N6Qjf84nf14
 </details>
-
+<details>
+ <summary>Configuration files</summary>
+ 
 ## Command usage:
     /punish <player> <reason>
     /punish version
@@ -63,6 +65,7 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     INVALID_TARGET: The targeted player is offline or does not exist.
     PUNISHMENT_REASON: Enter a reason for the punishment.
     NO_RECORD: Can't get record of that player.
+</details>
 ## Permission
     punish.use
 ### Developed by Clarence
