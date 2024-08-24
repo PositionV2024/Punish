@@ -165,6 +165,7 @@ public class InventoryHelper {
             Material.matchMaterial(name);
         } catch (IllegalArgumentException e) {
             e.getStackTrace();
+            System.out.println("An error has occurred.");
         }
         return Material.matchMaterial(name);
     }
@@ -234,13 +235,13 @@ public class InventoryHelper {
         ItemStack MINUTE_10ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("10MinuteMaterial")), getItemTitleColor() + getMinutes10Title());
         ItemStack MINUTE_20ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("20MinuteMaterial")), getItemTitleColor() + getMinutes20Title());
 
-        ItemStack HOURS_5ItemStack = createNewItemStack(getHours5Material(), getItemTitleColor() + getHours5Title());
-        ItemStack HOURS_10ItemStack = createNewItemStack(getHours10Material(), getItemTitleColor() + getHours10Title());
-        ItemStack HOURS_20ItemStack = createNewItemStack(getHours20Material(), getItemTitleColor() + getHours20Title());
+        ItemStack HOURS_5ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("5HoursMaterial")), getItemTitleColor() + getHours5Title());
+        ItemStack HOURS_10ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("10HoursMaterial")), getItemTitleColor() + getHours10Title());
+        ItemStack HOURS_20ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("20HoursMaterial")), getItemTitleColor() + getHours20Title());
 
-        ItemStack DAY_1temStack = createNewItemStack(getDay1Material(), getItemTitleColor() + getDay1Title());
-        ItemStack DAY_2temStack = createNewItemStack(getDay2Material(), getItemTitleColor() + getDay2Title());
-        ItemStack DAY_3temStack = createNewItemStack(getDay3Material(), getItemTitleColor() + getDay3Title());
+        ItemStack DAY_1temStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("1DayMaterial")), getItemTitleColor() + getDay1Title());
+        ItemStack DAY_2temStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("2DayMaterial")), getItemTitleColor() + getDay2Title());
+        ItemStack DAY_3temStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("3DayMaterial")), getItemTitleColor() + getDay3Title());
 
         InventoryHelper.setInventoryItem(inventory, 12, MINUTE_5ItemStack);
         InventoryHelper.setInventoryItem(inventory, 21, MINUTE_10ItemStack);

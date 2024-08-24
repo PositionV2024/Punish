@@ -59,7 +59,13 @@ public class Configuration {
                 "getTempBanDecorationMaterial",
                 "5MinutesMaterial",
                 "10MinuteMaterial",
-                "20MinuteMaterial"
+                "20MinuteMaterial",
+                "5HoursMaterial",
+                "10HoursMaterial",
+                "20HoursMaterial",
+                "1DayMaterial",
+                "2DayMaterial",
+                "3DayMaterial"
         );
 
         List<String> configurationMaterials = Arrays.asList(
@@ -74,7 +80,13 @@ public class Configuration {
                 InventoryHelper.getTempBanDecorationMaterial().toString(),
                 InventoryHelper.getMinutes5Material().toString(),
                 InventoryHelper.getMinutes10Material().toString(),
-                InventoryHelper.getMinutes20Material().toString()
+                InventoryHelper.getMinutes20Material().toString(),
+                InventoryHelper.getHours5Material().toString(),
+                InventoryHelper.getHours10Material().toString(),
+                InventoryHelper.getHours20Material().toString(),
+                InventoryHelper.getDay1Material().toString(),
+                InventoryHelper.getDay2Material().toString(),
+                InventoryHelper.getDay3Material().toString()
         );
 
 
