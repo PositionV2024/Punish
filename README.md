@@ -6,9 +6,12 @@ Punishment awaits naughty Minecraft players. Punish players that you think are b
 Free download: https://builtbybit.com/resources/punish.50069 (This download may not be up to date with the latest version)
 
 ## Features
-### Reload plugin: With this plugin, you do not have to reload the whole server just to reload the plugin in order for the changes from the configuration files to come in. Just simply do /punish reload <file_type> and you are good to go.
-### Retrieve player's data: With this plugin, after you have punished a player, the player's UUID will be recorded down in the configuration files.
-### Chages are made easy: With this plugin, you can change a way that a feature look by changing some configuration settings in the configuration files.
+### Reload plugin
+With this plugin, you do not have to reload the whole server just to reload the plugin in order for the changes from the configuration files to come in. Just simply do /punish reload <file_type> and you are good to go.
+### Retrieve player's data
+With this plugin, after you have punished a player, the player's UUID will be recorded down in the configuration files.
+### Chages are made easy
+With this plugin, you can change a way that a feature look by changing some configuration settings in the configuration files.
 
 ## Update logs
 <details>
