@@ -42,7 +42,7 @@ public class listener implements Listener {
             Util.setKick(target, Util.getStringBuilderMessage(), player);
             return;
         }
-        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getTemporaryBanTitle())) {
+        if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getItemTitleColor() + InventoryHelper.getTemporaryBanTitle())) {
             InventoryHelper.changeInventoryItem(event.getInventory(), InventoryHelper.getTempBanDecorationMaterial());
             if (event.getCurrentItem() == null) {
                 return;

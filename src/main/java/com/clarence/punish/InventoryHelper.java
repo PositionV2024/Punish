@@ -221,6 +221,7 @@ public class InventoryHelper {
     }
     public static void changeInventoryItem(Inventory inventory, Material inventoryFrameMaterial) {
         clearItemIndex(inventory, 13);
+        clearItemIndex(inventory, 21);
         clearItemIndex(inventory, 22);
         clearItemIndex(inventory, 23);
 
@@ -229,9 +230,9 @@ public class InventoryHelper {
             setInventoryItem(inventory, i, itemStack);
         }
 
-        ItemStack MINUTE_5ItemStack = createNewItemStack(getMinutes5Material(), getItemTitleColor() + getMinutes5Title());
-        ItemStack MINUTE_10ItemStack = createNewItemStack(getMinutes10Material(), getItemTitleColor() + getMinutes10Title());
-        ItemStack MINUTE_20ItemStack = createNewItemStack(getMinutes20Material(), getItemTitleColor() + getMinutes20Title());
+        ItemStack MINUTE_5ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("5MinutesMaterial")), getItemTitleColor() + getMinutes5Title());
+        ItemStack MINUTE_10ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("10MinuteMaterial")), getItemTitleColor() + getMinutes10Title());
+        ItemStack MINUTE_20ItemStack = createNewItemStack(getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("20MinuteMaterial")), getItemTitleColor() + getMinutes20Title());
 
         ItemStack HOURS_5ItemStack = createNewItemStack(getHours5Material(), getItemTitleColor() + getHours5Title());
         ItemStack HOURS_10ItemStack = createNewItemStack(getHours10Material(), getItemTitleColor() + getHours10Title());

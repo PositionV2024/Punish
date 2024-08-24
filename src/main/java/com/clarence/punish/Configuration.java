@@ -53,7 +53,10 @@ public class Configuration {
                 "typesOfPunishmentMaterial",
                 "getKickItemMaterial",
                 "getTemporaryBanMaterial",
-                "getBanMaterial"
+                "getBanMaterial",
+                "5MinutesMaterial",
+                "10MinuteMaterial",
+                "20MinuteMaterial"
         );
 
         List<String> configurationMaterials = Arrays.asList(
@@ -64,7 +67,10 @@ public class Configuration {
                 InventoryHelper.getTypesOfPunishmentsMaterial().toString(),
                 InventoryHelper.getKickItemMaterial().toString(),
                 InventoryHelper.getTemporaryBanMaterial().toString(),
-                InventoryHelper.getBanMaterial().toString()
+                InventoryHelper.getBanMaterial().toString(),
+                InventoryHelper.getMinutes5Material().toString(),
+                InventoryHelper.getMinutes10Material().toString(),
+                InventoryHelper.getMinutes20Material().toString()
         );
 
 
