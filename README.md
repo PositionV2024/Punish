@@ -6,10 +6,12 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
 ![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png "Plugin picture")
 #
 ![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif "Gif")
-#
-[![](https://img.youtube.com/vi/WIT9Etq-qts/0.jpg)](https://www.youtube.com/watch?v=WIT9Etq-qts "YouTube video")
 
 ## New updates
+<details>
+    <summary>v1.8-SNAPSHOT</summary>
+    https://www.youtube.com/watch?v=FOI09pppTek&t=2s
+    </details>
 <details>
     <summary>v1.7-SNAPSHOT</summary>
     In this update, there is no need to lookup the player's UUID because you can lookup the player's name. If the player can't be found, there won't be any punishment records for them. There is a messages.yml file. If you want to change certain messages, now you can.
@@ -41,17 +43,30 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
     https://youtu.be/N6Qjf84nf14
 </details>
-
+<details>
+ <summary>Configuration files</summary>
+ 
 ## Command usage:
     /punish <player> <reason>
     /punish version
     /punish lookup <player>
-## Messages.yml (Color code enabled)
+## Material.yml
+    defaultInventoryMaterial: YELLOW_STAINED_GLASS_PANE
+    reasonToBePunishmentMaterial: WRITABLE_BOOK
+    playerNameItemMaterial: DIAMOND_AXE
+    getPlayerUUIDMaterial: BOOK
+    typesOfPunishmentMaterial: BOOK
+    getKickItemMaterial: ENCHANTED_BOOK
+    getTemporaryBanMaterial: ENCHANTED_BOOK
+    getBanMaterial: ENCHANTED_BOOK
+## Messages.yml
     NO_CONSOLE_SENDER: You can't access this command through CONSOLE
     NO_PERMISSION: You do not have permission to use this command.
     INVALID_TARGET: The targeted player is offline or does not exist.
     PUNISHMENT_REASON: Enter a reason for the punishment.
     NO_RECORD: Can't get record of that player.
+</details>
+
 ## Permission
     punish.use
 ### Developed by Clarence
