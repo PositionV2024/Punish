@@ -1,11 +1,9 @@
+![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png "Plugin picture")
+
  # Punish
 Punishment awaits naughty Minecraft players. Punish players that you think are being inappropriate or misbehaving towards other players. Before you punish the targeted player, you must first specify a reason why this punishment was imposed on the targeted player. Secondly, you must select a punishment type. This can be a kick, a temporary ban, or a ban. Select the most appropriate punishment you think the player should receive. UUID is what is tied to your Minecraft account, and it can be seen on the punishment GUI. This is the targeted player's UUID, or universally unique identifier. You can also see the targeted player's name. After a thorough review of everything, you can click on the selected punishment you will impose on the targeted player.
 
 Free download: https://builtbybit.com/resources/punish.50069 (This download may not be up to date with the latest version)
-#
-![](https://raw.githubusercontent.com/PositionV2024/Punish/main/Screenshots/Main%20screenshot.png "Plugin picture")
-#
-![](https://github.com/PositionV2024/Punish/blob/main/Gif/Main.gif "Gif")
 
 ## New updates
 <details>
@@ -43,30 +41,4 @@ Free download: https://builtbybit.com/resources/punish.50069 (This download may 
     In this update, I have added a tab completion to suggest to you some of the common reasons why a player might get punished for.
     https://youtu.be/N6Qjf84nf14
 </details>
-<details>
- <summary>Configuration files</summary>
- 
-## Command usage:
-    /punish <player> <reason>
-    /punish version
-    /punish lookup <player>
-## Material.yml
-    defaultInventoryMaterial: YELLOW_STAINED_GLASS_PANE
-    reasonToBePunishmentMaterial: WRITABLE_BOOK
-    playerNameItemMaterial: DIAMOND_AXE
-    getPlayerUUIDMaterial: BOOK
-    typesOfPunishmentMaterial: BOOK
-    getKickItemMaterial: ENCHANTED_BOOK
-    getTemporaryBanMaterial: ENCHANTED_BOOK
-    getBanMaterial: ENCHANTED_BOOK
-## Messages.yml
-    NO_CONSOLE_SENDER: You can't access this command through CONSOLE
-    NO_PERMISSION: You do not have permission to use this command.
-    INVALID_TARGET: The targeted player is offline or does not exist.
-    PUNISHMENT_REASON: Enter a reason for the punishment.
-    NO_RECORD: Can't get record of that player.
-</details>
-
-## Permission
-    punish.use
 ### Developed by Clarence
