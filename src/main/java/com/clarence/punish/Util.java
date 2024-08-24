@@ -15,7 +15,7 @@ public class Util {
 
     private static String getPluginColor() { return pluginColor; }
     public static String getStringBuilderMessage() { return stringBuilderMessage; }
-    public static String Color(String message) { return ChatColor.translateAlternateColorCodes('&', getPluginColor() + getPluginPrefix() +  "&f" + message); }
+    public static String Color(String message) { return ChatColor.translateAlternateColorCodes('&', Configuration.getPunlish().getString("pluginColor") + getPluginPrefix() +  message); }
     public static String getPluginPrefix() { return pluginPrefix; }
     public static StringBuilder stringBuilder(String totalLength[], int buildFrom) {
         StringBuilder stringBuilder = new StringBuilder();

@@ -13,15 +13,16 @@ import java.util.List;
 public class Configuration {
      private static File userUUIDFile, messagesFile, materialFile = null;
      private static FileConfiguration userUUIDYamlConfiguration, messagesConfiguration, materialConfiguration = null;
-     public static File getUserUUIDFile() {return userUUIDFile;}
-     public static File getMessagesFile() {return messagesFile;}
-     public static File getMaterialFile() {return materialFile;}
+    private static Punish punish = null;
 
+    public static FileConfiguration getPunlish() { return Configuration.punish.getConfig(); }
      public static FileConfiguration getUserUUIDYamlConfiguration() { return userUUIDYamlConfiguration; }
      public static FileConfiguration getMessagesConfiguration() { return  messagesConfiguration; }
      public static FileConfiguration getMaterialConfiguration() {return materialConfiguration; }
 
     public Configuration(Punish punish) {
+        Configuration.punish = punish;
+
         userUUIDFile = createFile(punish,"Punishments.yml");
         userUUIDYamlConfiguration = YamlConfiguration.loadConfiguration(userUUIDFile);
 
@@ -39,10 +40,11 @@ public class Configuration {
                 "NO_RECORD"
         );
         List<String> getErrorMessages = Arrays.asList(
-                Errors.getNoConsoleSender(), Errors.getNoPermission(),
-                Errors.getInvalidTarget(),
-                Errors.getPunishmentReason(),
-                Errors.getNoRecord()
+                Errors.getNoConsoleSender(),
+                "&8" + Errors.getNoPermission(),
+                "&8" + Errors.getInvalidTarget(),
+                "&8" + Errors.getPunishmentReason(),
+                "&8" + Errors.getNoRecord()
         );
 
         List<String> materials = Arrays.asList(
@@ -54,6 +56,7 @@ public class Configuration {
                 "getKickItemMaterial",
                 "getTemporaryBanMaterial",
                 "getBanMaterial",
+                "getTempBanDecorationMaterial",
                 "5MinutesMaterial",
                 "10MinuteMaterial",
                 "20MinuteMaterial"
@@ -68,6 +71,7 @@ public class Configuration {
                 InventoryHelper.getKickItemMaterial().toString(),
                 InventoryHelper.getTemporaryBanMaterial().toString(),
                 InventoryHelper.getBanMaterial().toString(),
+                InventoryHelper.getTempBanDecorationMaterial().toString(),
                 InventoryHelper.getMinutes5Material().toString(),
                 InventoryHelper.getMinutes10Material().toString(),
                 InventoryHelper.getMinutes20Material().toString()
@@ -85,6 +89,8 @@ public class Configuration {
         saveConfigurationFile(userUUIDYamlConfiguration, userUUIDFile);
         saveConfigurationFile(messagesConfiguration, messagesFile);
         saveConfigurationFile(materialConfiguration, materialFile);
+
+        punish.saveDefaultConfig();
     }
 
     public void addDefault(FileConfiguration yamlConfiguration, String path, String name) {

@@ -43,7 +43,7 @@ public class listener implements Listener {
             return;
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().contains(InventoryHelper.getItemTitleColor() + InventoryHelper.getTemporaryBanTitle())) {
-            InventoryHelper.changeInventoryItem(event.getInventory(), InventoryHelper.getTempBanDecorationMaterial());
+            InventoryHelper.changeInventoryItem(event.getInventory(), InventoryHelper.getMaterialFromConfiguration(Configuration.getMaterialConfiguration().getString("getTempBanDecorationMaterial")));
             if (event.getCurrentItem() == null) {
                 return;
             }
